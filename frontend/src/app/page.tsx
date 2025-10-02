@@ -13,12 +13,14 @@ export default function Home() {
       <div className="relative z-10 container mx-auto px-4 py-16">
         {/* Hero Section */}
         <div className="text-center mb-20">
-          <div className="inline-block mb-8">
-            <h1 className="heading-1 text-gradient animate-fade-in">
+          <div className="inline-block mb-8 relative">
+            {/* Subtle backdrop for better text visibility */}
+            <div className="absolute inset-0 bg-black/20 backdrop-blur-sm rounded-3xl -m-8"></div>
+            <h1 className="heading-1 text-white animate-fade-in relative z-10" style={{textShadow: '0 4px 8px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.4)'}}>
               Welcome to{' '}
-              <span className="relative">
+              <span className="relative bg-gradient-to-r from-neon-cyan to-neon-purple bg-clip-text text-transparent" style={{textShadow: '0 0 30px rgba(0, 212, 255, 0.9), 0 0 60px rgba(131, 56, 236, 0.7)'}}>
                 Revelio
-                <div className="absolute -inset-2 bg-gradient-to-r from-primary-600/20 to-accent-600/20 rounded-2xl blur-lg animate-pulse-slow"></div>
+                <div className="absolute -inset-2 bg-gradient-to-r from-neon-cyan/30 to-neon-purple/30 rounded-2xl blur-xl animate-pulse-slow"></div>
               </span>
             </h1>
           </div>
