@@ -118,7 +118,7 @@ export default function BrandWorkspace() {
             </div>
             {!sidebarCollapsed && (
               <div>
-                <h2 className="neo-heading-4 text-white">Revelio</h2>
+                <h2 className="text-base font-normal text-white">Revelio</h2>
                 <p className="neo-text-small text-slate-400">Brand Platform</p>
               </div>
             )}
