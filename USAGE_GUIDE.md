@@ -15,6 +15,28 @@
 
 ---
 
+## 🔒 LOCKED COLOR SYSTEM
+
+**IMPORTANT**: The following colors are LOCKED and should not be changed without explicit approval:
+
+### Locked Background Colors
+- **Primary Background**: `slate-900` to `slate-800` gradient (dark theme)
+- **Text Colors**: White primary, `slate-200` secondary
+- **Brand Gradient**: Neon cyan to purple for "Revelio" text only
+
+### Locked CSS Classes
+```css
+.locked-bg-primary     /* Main dark background */
+.locked-text-primary   /* White text */
+.locked-text-secondary /* Slate-200 text */
+.locked-brand-gradient /* Revelio brand gradient */
+.locked-border         /* Slate-600 borders */
+```
+
+**Usage**: These classes ensure consistent dark theme across the application.
+
+---
+
 ## Logo Specifications
 
 ### Primary Logo
@@ -61,21 +83,16 @@
 
 ## Background System
 
-### Primary App Background
-- **Gradient**: Cyan → Blue → Purple
+### Primary App Background (LOCKED)
+- **Gradient**: Slate-900 → Slate-800 → Slate-900 (Dark Theme)
 - **Usage**: Main application backgrounds, hero sections
 - **Coverage**: 40% of total interface
+- **Status**: LOCKED - Do not change this color scheme
 
 ```css
-.bg-primary-gradient {
-  background: linear-gradient(135deg, #00D4FF 0%, #3A86FF 50%, #8338EC 100%);
-  background-size: 400% 400%;
-  animation: gradient-flow 15s ease infinite;
-}
-
-@keyframes gradient-flow {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+.locked-bg-primary {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  background-attachment: fixed;
 }
 ```
 

@@ -1,22 +1,22 @@
 export default function Home() {
   return (
     <main className="min-h-screen relative">
-      {/* Clean background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
+      {/* Locked dark background */}
+      <div className="absolute inset-0 locked-bg-primary"></div>
       
       <div className="relative z-10 container mx-auto px-4 py-16">
         {/* Hero Section */}
         <div className="text-center mb-20">
           <div className="mb-8">
-            <h1 className="heading-1 text-white animate-fade-in">
+            <h1 className="heading-1 locked-text-primary animate-fade-in">
               Welcome to{' '}
-              <span className="bg-gradient-to-r from-neon-cyan to-neon-purple bg-clip-text text-transparent">
+              <span className="locked-brand-gradient">
                 Revelio
               </span>
             </h1>
           </div>
           
-          <p className="text-xl md:text-2xl text-slate-200 mb-12 max-w-4xl mx-auto leading-relaxed animate-slide-up">
+          <p className="text-xl md:text-2xl locked-text-secondary mb-12 max-w-4xl mx-auto leading-relaxed animate-slide-up">
             A creator-powered marketplace where writers, artists, and storytellers get paid for impact — 
             blending authentic research with brand partnerships, distributed natively across social platforms.
           </p>
