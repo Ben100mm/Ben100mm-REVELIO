@@ -231,15 +231,14 @@ export default function CreatorWorkspace() {
             </div>
             
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-bold">JD</span>
-                </div>
-                <span className="neo-text-body text-slate-300">{creator?.displayName}</span>
+              <button className="p-2 text-slate-300 hover:text-white transition-colors duration-200">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM4.828 7l2.586 2.586a2 2 0 002.828 0L12.828 7H4.828zM4.828 17l2.586-2.586a2 2 0 012.828 0L12.828 17H4.828z" />
+                </svg>
+              </button>
+              <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                <span className="text-white text-sm font-bold">JD</span>
               </div>
-              <NeoButton variant="ghost" size="sm">
-                Settings
-              </NeoButton>
             </div>
           </div>
         </header>
