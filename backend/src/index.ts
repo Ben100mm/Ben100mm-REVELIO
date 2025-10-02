@@ -8,6 +8,18 @@ import dotenv from 'dotenv';
 
 import { errorHandler } from '@/middleware/errorHandler';
 import { notFoundHandler } from '@/middleware/notFoundHandler';
+import databaseService from '@/services/databaseService';
+import cacheService from '@/services/cacheService';
+import performanceService from '@/services/performanceService';
+import {
+  performanceMiddleware,
+  queryPerformanceMiddleware,
+  cachePerformanceMiddleware,
+  responseTimeMiddleware,
+  memoryUsageMiddleware,
+  apiRateLimitMiddleware,
+  performanceStatsMiddleware
+} from '@/middleware/performanceMiddleware';
 import authRoutes from '@/routes/auth';
 import creatorRoutes from '@/routes/creators';
 import brandRoutes from '@/routes/brands';
@@ -51,12 +63,53 @@ app.use(compression());
 // Logging middleware
 app.use(morgan('combined'));
 
+// Performance monitoring middleware
+app.use(performanceMiddleware);
+app.use(queryPerformanceMiddleware);
+app.use(cachePerformanceMiddleware);
+app.use(responseTimeMiddleware);
+app.use(memoryUsageMiddleware);
+app.use(apiRateLimitMiddleware);
+app.use(performanceStatsMiddleware);
+
 // Health check endpoint
-app.get('/health', (req, res) => {
-  res.status(200).json({
-    status: 'OK',
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime()
+app.get('/health', async (req, res) => {
+  try {
+    const [dbHealth, cacheStats, performanceStats] = await Promise.all([
+      databaseService.healthCheck(),
+      cacheService.getStats(),
+      performanceService.getStats()
+    ]);
+
+    res.status(200).json({
+      status: 'OK',
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      database: dbHealth,
+      cache: cacheStats,
+      performance: performanceStats
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'ERROR',
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      error: (error as Error).message
+    });
+  }
+});
+
+// Performance stats endpoint
+app.get('/api/performance/stats', (req, res) => {
+  const stats = performanceService.getStats();
+  const slowRequests = performanceService.getSlowRequests(10);
+  
+  res.json({
+    success: true,
+    data: {
+      ...stats,
+      slowRequests
+    }
   });
 });
 
@@ -77,10 +130,52 @@ app.use('/api/escrow', escrowRoutes);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Health check: http://localhost:${PORT}/health`);
+// Initialize services and start server
+const startServer = async () => {
+  try {
+    // Initialize database connection
+    await databaseService.connect();
+    console.log('Database service initialized');
+
+    // Start server
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+      console.log(`Health check: http://localhost:${PORT}/health`);
+    });
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
+};
+
+// Graceful shutdown
+process.on('SIGINT', async () => {
+  console.log('Received SIGINT, shutting down gracefully...');
+  try {
+    await databaseService.disconnect();
+    await cacheService.close();
+    console.log('Services disconnected successfully');
+    process.exit(0);
+  } catch (error) {
+    console.error('Error during shutdown:', error);
+    process.exit(1);
+  }
 });
+
+process.on('SIGTERM', async () => {
+  console.log('Received SIGTERM, shutting down gracefully...');
+  try {
+    await databaseService.disconnect();
+    await cacheService.close();
+    console.log('Services disconnected successfully');
+    process.exit(0);
+  } catch (error) {
+    console.error('Error during shutdown:', error);
+    process.exit(1);
+  }
+});
+
+// Start the server
+startServer();
 
 export default app;

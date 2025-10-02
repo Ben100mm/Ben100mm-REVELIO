@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
+import cacheService, { CACHE_KEYS } from '@/services/cacheService';
 
 const prisma = new PrismaClient();
 
@@ -7,6 +8,21 @@ export const getCreators = async (req: Request, res: Response) => {
   try {
     const { page = 1, limit = 10, search, status, verified } = req.query;
     const skip = (Number(page) - 1) * Number(limit);
+
+    // Create cache key
+    const filters = `${search || ''}:${status || ''}:${verified || ''}`;
+    const cacheKey = CACHE_KEYS.CREATORS_LIST(Number(page), Number(limit), filters);
+
+    // Try to get from cache first
+    const cachedData = await cacheService.get(cacheKey);
+    if (cachedData) {
+      return res.json({
+        success: true,
+        data: cachedData.creators,
+        pagination: cachedData.pagination,
+        cached: true
+      });
+    }
 
     const where: any = {};
     
@@ -45,15 +61,23 @@ export const getCreators = async (req: Request, res: Response) => {
       prisma.creator.count({ where })
     ]);
 
-    res.json({
-      success: true,
-      data: creators,
+    const responseData = {
+      creators,
       pagination: {
         page: Number(page),
         limit: Number(limit),
         total,
         pages: Math.ceil(total / Number(limit))
       }
+    };
+
+    // Cache the result for 30 minutes
+    await cacheService.set(cacheKey, responseData, 1800);
+
+    res.json({
+      success: true,
+      data: creators,
+      pagination: responseData.pagination
     });
   } catch (error) {
     console.error('Get creators error:', error);
@@ -64,6 +88,17 @@ export const getCreators = async (req: Request, res: Response) => {
 export const getCreator = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    const cacheKey = CACHE_KEYS.CREATOR(id);
+
+    // Try to get from cache first
+    const cachedCreator = await cacheService.get(cacheKey);
+    if (cachedCreator) {
+      return res.json({
+        success: true,
+        data: cachedCreator,
+        cached: true
+      });
+    }
 
     const creator = await prisma.creator.findUnique({
       where: { id },
@@ -99,6 +134,9 @@ export const getCreator = async (req: Request, res: Response) => {
     if (!creator) {
       return res.status(404).json({ message: 'Creator not found' });
     }
+
+    // Cache the result for 1 hour
+    await cacheService.set(cacheKey, creator, 3600);
 
     res.json({
       success: true,
@@ -141,6 +179,9 @@ export const updateCreator = async (req: Request, res: Response) => {
       }
     });
 
+    // Invalidate related cache
+    await cacheService.invalidateCreator(id);
+
     res.json({
       success: true,
       data: updatedCreator
@@ -158,6 +199,9 @@ export const deleteCreator = async (req: Request, res: Response) => {
     await prisma.creator.delete({
       where: { id }
     });
+
+    // Invalidate related cache
+    await cacheService.invalidateCreator(id);
 
     res.json({
       success: true,

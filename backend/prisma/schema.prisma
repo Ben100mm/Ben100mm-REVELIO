@@ -23,6 +23,8 @@ model User {
   brand     Brand?
   sessions  Session[]
 
+  @@index([role])
+  @@index([createdAt])
   @@map("users")
 }
 
@@ -35,6 +37,8 @@ model Session {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@index([userId])
+  @@index([expiresAt])
   @@map("sessions")
 }
 
@@ -61,6 +65,10 @@ model Creator {
   briefApplications BriefApplication[]
   contracts   Contract[]
 
+  @@index([status])
+  @@index([isVerified])
+  @@index([createdAt])
+  @@index([displayName])
   @@map("creators")
 }
 
@@ -82,6 +90,10 @@ model Brand {
   briefs   Brief[]
   contracts Contract[]
 
+  @@index([status])
+  @@index([createdAt])
+  @@index([name])
+  @@index([industry])
   @@map("brands")
 }
 
@@ -107,6 +119,14 @@ model Content {
   distributions ContentDistribution[]
   reviews    ContentReview[]
 
+  @@index([creatorId])
+  @@index([status])
+  @@index([type])
+  @@index([isSponsored])
+  @@index([brandId])
+  @@index([publishedAt])
+  @@index([createdAt])
+  @@index([title])
   @@map("content")
 }
 
@@ -128,6 +148,12 @@ model Campaign {
   brand   Brand   @relation(fields: [brandId], references: [id], onDelete: Cascade)
   creator Creator @relation(fields: [creatorId], references: [id], onDelete: Cascade)
 
+  @@index([brandId])
+  @@index([creatorId])
+  @@index([status])
+  @@index([startDate])
+  @@index([endDate])
+  @@index([createdAt])
   @@map("campaigns")
 }
 
@@ -147,6 +173,10 @@ model ContentPerformance {
   // Relations
   content Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
 
+  @@index([contentId])
+  @@index([platform])
+  @@index([date])
+  @@index([createdAt])
   @@map("content_performance")
 }
 
@@ -164,6 +194,10 @@ model ContentDistribution {
   // Relations
   content Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
 
+  @@index([contentId])
+  @@index([platform])
+  @@index([status])
+  @@index([publishedAt])
   @@map("content_distributions")
 }
 
@@ -180,6 +214,10 @@ model CreatorEarning {
   // Relations
   creator Creator @relation(fields: [creatorId], references: [id], onDelete: Cascade)
 
+  @@index([creatorId])
+  @@index([type])
+  @@index([date])
+  @@index([createdAt])
   @@map("creator_earnings")
 }
 
@@ -194,6 +232,9 @@ model SocialLink {
   // Relations
   creator Creator @relation(fields: [creatorId], references: [id], onDelete: Cascade)
 
+  @@index([creatorId])
+  @@index([platform])
+  @@index([isActive])
   @@map("social_links")
 }
 
@@ -220,6 +261,12 @@ model Brief {
   applications BriefApplication[]
   contracts    Contract[]
 
+  @@index([brandId])
+  @@index([status])
+  @@index([isPublic])
+  @@index([contentType])
+  @@index([deadline])
+  @@index([createdAt])
   @@map("briefs")
 }
 
@@ -239,6 +286,10 @@ model BriefApplication {
   brief   Brief   @relation(fields: [briefId], references: [id], onDelete: Cascade)
   creator Creator @relation(fields: [creatorId], references: [id], onDelete: Cascade)
 
+  @@index([briefId])
+  @@index([creatorId])
+  @@index([status])
+  @@index([createdAt])
   @@map("brief_applications")
 }
 
@@ -265,6 +316,13 @@ model Contract {
   milestones   Milestone[]
   escrowPayments EscrowPayment[]
 
+  @@index([briefId])
+  @@index([creatorId])
+  @@index([brandId])
+  @@index([status])
+  @@index([startDate])
+  @@index([endDate])
+  @@index([createdAt])
   @@map("contracts")
 }
 
@@ -283,6 +341,10 @@ model Milestone {
   // Relations
   contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
 
+  @@index([contractId])
+  @@index([status])
+  @@index([dueDate])
+  @@index([completedAt])
   @@map("milestones")
 }
 
@@ -300,6 +362,10 @@ model EscrowPayment {
   // Relations
   contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
 
+  @@index([contractId])
+  @@index([status])
+  @@index([releasedAt])
+  @@index([createdAt])
   @@map("escrow_payments")
 }
 
@@ -318,6 +384,11 @@ model ContentReview {
   content  Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
   contract Contract? @relation(fields: [contractId], references: [id])
 
+  @@index([contentId])
+  @@index([contractId])
+  @@index([reviewerId])
+  @@index([status])
+  @@index([createdAt])
   @@map("content_reviews")
 }
 
