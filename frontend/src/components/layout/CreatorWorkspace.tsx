@@ -645,7 +645,7 @@ export default function CreatorWorkspace() {
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center space-x-3">
                           <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                            <span className="text-white text-sm font-bold">🏦</span>
+                            <span className="text-white text-sm font-bold">Bank</span>
                           </div>
                           <div>
                             <h4 className="neo-text-body text-white font-medium">Bank Transfer</h4>
@@ -661,7 +661,7 @@ export default function CreatorWorkspace() {
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center space-x-3">
                           <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                            <span className="text-white text-sm font-bold">💳</span>
+                            <span className="text-white text-sm font-bold">Card</span>
                           </div>
                           <div>
                             <h4 className="neo-text-body text-white font-medium">PayPal</h4>
