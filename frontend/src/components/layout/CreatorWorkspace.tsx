@@ -80,14 +80,14 @@ export default function CreatorWorkspace() {
   }, []);
 
   const sidebarItems = [
-    { id: 'overview', label: 'Overview', icon: '📊', description: 'Dashboard overview' },
-    { id: 'content', label: 'Content Hub', icon: '🎬', description: 'Create and manage content' },
-    { id: 'analytics', label: 'Analytics', icon: '📈', description: 'Performance insights' },
-    { id: 'earnings', label: 'Earnings', icon: '💰', description: 'Track your income' },
-    { id: 'campaigns', label: 'Campaigns', icon: '🎯', description: 'Manage partnerships' },
-    { id: 'audience', label: 'Audience', icon: '👥', description: 'Follower insights' },
-    { id: 'collaborations', label: 'Collaborations', icon: '🤝', description: 'Brand partnerships' },
-    { id: 'settings', label: 'Settings', icon: '⚙️', description: 'Account settings' }
+    { id: 'overview', label: 'Overview', icon: 'dashboard', description: 'Dashboard overview' },
+    { id: 'content', label: 'Content Hub', icon: 'content', description: 'Create and manage content' },
+    { id: 'analytics', label: 'Analytics', icon: 'analytics', description: 'Performance insights' },
+    { id: 'earnings', label: 'Earnings', icon: 'earnings', description: 'Track your income' },
+    { id: 'campaigns', label: 'Campaigns', icon: 'campaigns', description: 'Manage partnerships' },
+    { id: 'audience', label: 'Audience', icon: 'audience', description: 'Follower insights' },
+    { id: 'collaborations', label: 'Collaborations', icon: 'collaborations', description: 'Brand partnerships' },
+    { id: 'settings', label: 'Settings', icon: 'settings', description: 'Account settings' }
   ];
 
   if (loading) {
@@ -134,7 +134,49 @@ export default function CreatorWorkspace() {
                   : 'text-slate-300 hover:bg-slate-700/50 hover:text-white'
               }`}
             >
-              <span className="text-xl">{item.icon}</span>
+              <div className="w-5 h-5 flex items-center justify-center">
+                {item.icon === 'dashboard' && (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                  </svg>
+                )}
+                {item.icon === 'content' && (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                )}
+                {item.icon === 'analytics' && (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                )}
+                {item.icon === 'earnings' && (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                  </svg>
+                )}
+                {item.icon === 'campaigns' && (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                )}
+                {item.icon === 'audience' && (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                )}
+                {item.icon === 'collaborations' && (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                )}
+                {item.icon === 'settings' && (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                )}
+              </div>
               {!sidebarCollapsed && (
                 <div className="flex-1 text-left">
                   <div className="neo-text-body font-medium">{item.label}</div>
@@ -235,7 +277,9 @@ export default function CreatorWorkspace() {
                     className="h-20 flex flex-col items-center justify-center space-y-2"
                     onClick={() => setActiveTab('content')}
                   >
-                    <span className="text-2xl">🎬</span>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
                     <span>Create Content</span>
                   </NeoButton>
                   <NeoButton 
@@ -243,7 +287,9 @@ export default function CreatorWorkspace() {
                     className="h-20 flex flex-col items-center justify-center space-y-2"
                     onClick={() => setActiveTab('analytics')}
                   >
-                    <span className="text-2xl">📈</span>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
                     <span>View Analytics</span>
                   </NeoButton>
                   <NeoButton 
@@ -251,7 +297,9 @@ export default function CreatorWorkspace() {
                     className="h-20 flex flex-col items-center justify-center space-y-2"
                     onClick={() => setActiveTab('earnings')}
                   >
-                    <span className="text-2xl">💰</span>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                    </svg>
                     <span>Track Earnings</span>
                   </NeoButton>
                   <NeoButton 
@@ -259,7 +307,9 @@ export default function CreatorWorkspace() {
                     className="h-20 flex flex-col items-center justify-center space-y-2"
                     onClick={() => setActiveTab('campaigns')}
                   >
-                    <span className="text-2xl">🎯</span>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
                     <span>Manage Campaigns</span>
                   </NeoButton>
                 </div>
@@ -271,7 +321,9 @@ export default function CreatorWorkspace() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between p-4 neo-glass rounded-xl">
                     <div className="flex items-center space-x-3">
-                      <span className="text-2xl">🎥</span>
+                      <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
                       <div>
                         <h4 className="neo-text-body text-white font-medium">iPhone 15 Pro Review</h4>
                         <p className="neo-text-small text-slate-400">Published 2 hours ago</p>
@@ -282,7 +334,9 @@ export default function CreatorWorkspace() {
                   
                   <div className="flex items-center justify-between p-4 neo-glass rounded-xl">
                     <div className="flex items-center space-x-3">
-                      <span className="text-2xl">💰</span>
+                      <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                      </svg>
                       <div>
                         <h4 className="neo-text-body text-white font-medium">Payment Received</h4>
                         <p className="neo-text-small text-slate-400">$2,500 from TechCorp Campaign</p>
@@ -293,7 +347,9 @@ export default function CreatorWorkspace() {
                   
                   <div className="flex items-center justify-between p-4 neo-glass rounded-xl">
                     <div className="flex items-center space-x-3">
-                      <span className="text-2xl">📈</span>
+                      <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                      </svg>
                       <div>
                         <h4 className="neo-text-body text-white font-medium">Analytics Update</h4>
                         <p className="neo-text-small text-slate-400">15K new views on latest video</p>

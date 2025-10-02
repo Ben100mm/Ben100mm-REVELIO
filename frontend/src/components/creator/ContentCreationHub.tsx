@@ -52,7 +52,7 @@ export default function ContentCreationHub() {
       name: 'Product Review',
       type: 'video',
       description: 'Create an engaging product review video',
-      icon: '🎥',
+      icon: 'video',
       estimatedTime: '2-3 hours'
     },
     {
@@ -60,7 +60,7 @@ export default function ContentCreationHub() {
       name: 'Tutorial Guide',
       type: 'video',
       description: 'Step-by-step tutorial content',
-      icon: '📚',
+      icon: 'tutorial',
       estimatedTime: '3-4 hours'
     },
     {
@@ -68,7 +68,7 @@ export default function ContentCreationHub() {
       name: 'Behind the Scenes',
       type: 'image',
       description: 'Share your creative process',
-      icon: '📸',
+      icon: 'camera',
       estimatedTime: '30 minutes'
     },
     {
@@ -76,7 +76,7 @@ export default function ContentCreationHub() {
       name: 'Blog Post',
       type: 'article',
       description: 'Write an in-depth article',
-      icon: '📝',
+      icon: 'article',
       estimatedTime: '1-2 hours'
     },
     {
@@ -84,7 +84,7 @@ export default function ContentCreationHub() {
       name: 'Story Series',
       type: 'story',
       description: 'Create engaging story content',
-      icon: '📱',
+      icon: 'story',
       estimatedTime: '45 minutes'
     },
     {
@@ -92,7 +92,7 @@ export default function ContentCreationHub() {
       name: 'Live Stream',
       type: 'video',
       description: 'Connect with your audience live',
-      icon: '🔴',
+      icon: 'live',
       estimatedTime: '1+ hours'
     }
   ];
@@ -270,7 +270,40 @@ export default function ContentCreationHub() {
               className="h-24 flex flex-col items-center justify-center space-y-2 p-4"
               onClick={() => handleCreateContent(template)}
             >
-              <span className="text-2xl">{template.icon}</span>
+              <div className="w-8 h-8 flex items-center justify-center">
+                {template.icon === 'video' && (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                )}
+                {template.icon === 'tutorial' && (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                )}
+                {template.icon === 'camera' && (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                )}
+                {template.icon === 'article' && (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                )}
+                {template.icon === 'story' && (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                )}
+                {template.icon === 'live' && (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    <circle cx="12" cy="12" r="3" fill="currentColor" />
+                  </svg>
+                )}
+              </div>
               <span className="neo-text-small text-center">{template.name}</span>
             </NeoButton>
           ))}

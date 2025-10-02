@@ -314,13 +314,37 @@ export default function MarketplaceNeo() {
         {/* Header */}
         <section className="mb-8">
           <NeoCard variant="elevated" glow className="p-8 text-center">
+            {/* Marketplace Type Toggle */}
+            <div className="mb-6">
+              <div className="inline-flex bg-slate-800/50 rounded-xl p-1">
+                <NeoButton
+                  variant={marketplaceType === 'creator' ? 'primary' : 'ghost'}
+                  size="sm"
+                  onClick={() => setMarketplaceType('creator')}
+                  className="px-6"
+                >
+                  Creator Marketplace
+                </NeoButton>
+                <NeoButton
+                  variant={marketplaceType === 'business' ? 'primary' : 'ghost'}
+                  size="sm"
+                  onClick={() => setMarketplaceType('business')}
+                  className="px-6"
+                >
+                  Business Marketplace
+                </NeoButton>
+              </div>
+            </div>
+
             <h1 className="neo-heading-1 neo-text-holographic mb-4">
-              Creator{' '}
+              {marketplaceType === 'creator' ? 'Creator' : 'Business'}{' '}
               <span className="neo-text-glow">Marketplace</span>
             </h1>
             <p className="neo-text-large text-slate-300 max-w-3xl mx-auto">
-              Discover exciting opportunities and connect with brands looking for authentic, 
-              impactful content creators like you.
+              {marketplaceType === 'creator' 
+                ? 'Discover exciting opportunities and connect with brands looking for authentic, impactful content creators like you.'
+                : 'Find talented creators and connect with them for your next campaign. Browse profiles, view portfolios, and start meaningful collaborations.'
+              }
             </p>
           </NeoCard>
         </section>
@@ -329,9 +353,14 @@ export default function MarketplaceNeo() {
         <section className="mb-8">
           <div className="neo-grid-2 neo-spacing-lg">
             <NeoCard variant="glass" className="p-6">
-              <h3 className="neo-heading-4 text-white mb-4">Search Briefs</h3>
+              <h3 className="neo-heading-4 text-white mb-4">
+                {marketplaceType === 'creator' ? 'Search Briefs' : 'Search Creators'}
+              </h3>
               <NeoInput
-                placeholder="Search by title, description, or tags..."
+                placeholder={marketplaceType === 'creator' 
+                  ? "Search by title, description, or tags..." 
+                  : "Search by name, bio, or specialties..."
+                }
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 variant="glass"
@@ -339,7 +368,9 @@ export default function MarketplaceNeo() {
             </NeoCard>
 
             <NeoCard variant="glass" className="p-6">
-              <h3 className="neo-heading-4 text-white mb-4">Content Type</h3>
+              <h3 className="neo-heading-4 text-white mb-4">
+                {marketplaceType === 'creator' ? 'Content Type' : 'Specialties'}
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {categories.map((category) => (
                   <NeoButton
@@ -362,12 +393,16 @@ export default function MarketplaceNeo() {
         <section>
           <div className="flex items-center justify-between mb-6">
             <h2 className="neo-heading-2 neo-text-glow">
-              Available Briefs ({filteredBriefs.length})
+              {marketplaceType === 'creator' 
+                ? `Available Briefs (${filteredBriefs.length})`
+                : `Available Creators (${filteredCreators.length})`
+              }
             </h2>
           </div>
 
           <div className="space-y-6">
-            {filteredBriefs.map((brief) => (
+            {marketplaceType === 'creator' ? (
+              filteredBriefs.map((brief) => (
               <NeoCard key={brief.id} variant="interactive" className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -425,16 +460,85 @@ export default function MarketplaceNeo() {
                   </div>
                 </div>
               </NeoCard>
-            ))}
+              ))
+            ) : (
+              filteredCreators.map((creator) => (
+                <NeoCard key={creator.id} variant="interactive" className="p-6">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-4 mb-4">
+                        <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-600 rounded-xl flex items-center justify-center">
+                          <span className="text-white font-bold text-xl">
+                            {creator.name.charAt(0)}
+                          </span>
+                        </div>
+                        <div>
+                          <div className="flex items-center space-x-2">
+                            <h3 className="neo-heading-4 text-white">{creator.name}</h3>
+                            {creator.isVerified && (
+                              <NeoBadge variant="success" size="sm">Verified</NeoBadge>
+                            )}
+                          </div>
+                          <p className="neo-text-small text-slate-400">
+                            {creator.location} • ${creator.hourlyRate}/hour
+                          </p>
+                        </div>
+                      </div>
+
+                      <p className="neo-text-body text-slate-300 mb-4">
+                        {creator.bio}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {creator.specialties.map((specialty) => (
+                          <NeoBadge key={specialty} variant="secondary">
+                            {specialty}
+                          </NeoBadge>
+                        ))}
+                      </div>
+
+                      <div className="flex items-center space-x-4">
+                        <NeoBadge variant="info">
+                          {creator.followerCount.toLocaleString()} followers
+                        </NeoBadge>
+                        <NeoBadge variant="warning">
+                          {creator.engagementRate}% engagement
+                        </NeoBadge>
+                        <NeoBadge variant="success">
+                          {creator.rating}★ rating
+                        </NeoBadge>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col space-y-2 ml-6">
+                      <NeoButton
+                        variant="primary"
+                        size="md"
+                        glow
+                        onClick={() => handleContactCreator(creator)}
+                      >
+                        Contact Creator
+                      </NeoButton>
+                      <NeoButton variant="ghost" size="sm">
+                        View Portfolio
+                      </NeoButton>
+                    </div>
+                  </div>
+                </NeoCard>
+              ))
+            )}
           </div>
 
-          {filteredBriefs.length === 0 && (
+          {(marketplaceType === 'creator' ? filteredBriefs.length === 0 : filteredCreators.length === 0) && (
             <NeoCard variant="glass" className="p-12 text-center">
               <div className="neo-heading-3 text-slate-400 mb-4">
-                No briefs found
+                {marketplaceType === 'creator' ? 'No briefs found' : 'No creators found'}
               </div>
               <p className="neo-text-body text-slate-500">
-                Try adjusting your search criteria or check back later for new opportunities.
+                {marketplaceType === 'creator' 
+                  ? 'Try adjusting your search criteria or check back later for new opportunities.'
+                  : 'Try adjusting your search criteria or check back later for new creators.'
+                }
               </p>
             </NeoCard>
           )}
@@ -508,6 +612,80 @@ export default function MarketplaceNeo() {
               <NeoButton 
                 variant="ghost" 
                 onClick={() => setShowApplicationModal(false)}
+              >
+                Cancel
+              </NeoButton>
+            </div>
+          </div>
+        </NeoModal>
+
+        {/* Contact Creator Modal */}
+        <NeoModal
+          isOpen={showContactModal}
+          onClose={() => setShowContactModal(false)}
+          title={`Contact: ${selectedCreator?.name}`}
+        >
+          <div className="space-y-6">
+            <div className="neo-glass p-4 rounded-xl">
+              <h4 className="neo-heading-5 text-white mb-2">Creator Details</h4>
+              <p className="neo-text-small text-slate-300 mb-2">
+                Rate: ${selectedCreator?.hourlyRate}/hour
+              </p>
+              <p className="neo-text-small text-slate-300 mb-2">
+                Followers: {selectedCreator?.followerCount.toLocaleString()}
+              </p>
+              <p className="neo-text-small text-slate-300">
+                Engagement: {selectedCreator?.engagementRate}%
+              </p>
+            </div>
+
+            <NeoInput
+              label="Project Description"
+              placeholder="Describe your project or campaign..."
+              value={applicationData.proposal}
+              onChange={(e) => setApplicationData({...applicationData, proposal: e.target.value})}
+              variant="glass"
+              multiline
+              rows={3}
+            />
+
+            <NeoInput
+              label="Budget Range"
+              placeholder="Your budget range (e.g., $1000-5000)"
+              value={applicationData.budget}
+              onChange={(e) => setApplicationData({...applicationData, budget: e.target.value})}
+              variant="glass"
+            />
+
+            <NeoInput
+              label="Timeline"
+              placeholder="When do you need this completed?"
+              value={applicationData.timeline}
+              onChange={(e) => setApplicationData({...applicationData, timeline: e.target.value})}
+              variant="glass"
+            />
+
+            <NeoInput
+              label="Additional Message"
+              placeholder="Any specific requirements or questions..."
+              value={applicationData.message}
+              onChange={(e) => setApplicationData({...applicationData, message: e.target.value})}
+              variant="glass"
+              multiline
+              rows={2}
+            />
+
+            <div className="flex space-x-4">
+              <NeoButton 
+                variant="primary" 
+                className="flex-1"
+                onClick={handleSubmitContact}
+              >
+                Send Message
+              </NeoButton>
+              <NeoButton 
+                variant="ghost" 
+                onClick={() => setShowContactModal(false)}
               >
                 Cancel
               </NeoButton>
