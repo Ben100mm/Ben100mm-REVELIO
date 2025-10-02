@@ -1,4 +1,4 @@
-# 🚨 CRITICAL PORT CONFIGURATION - NEVER CHANGE
+# CRITICAL PORT CONFIGURATION - NEVER CHANGE
 
 ## **MANDATORY PORT ASSIGNMENTS**
 
@@ -13,24 +13,24 @@
 - **Configuration**: `backend/src/index.ts` - `PORT = process.env.PORT || 6002`
 - **Configuration**: `backend/src/simple-server.ts` - `PORT = process.env.PORT || 6002`
 
-## **⚠️ IMPORTANT RULES**
+## **IMPORTANT RULES**
 
 1. **NEVER** change these port assignments
 2. **ALWAYS** use these exact ports for development
 3. **ALWAYS** update documentation when referencing these ports
 4. **ALWAYS** ensure CORS and API configurations match these ports
 
-## **🔧 Configuration Files Updated**
+## **Configuration Files Updated**
 
-- ✅ `frontend/package.json` - Frontend dev script
-- ✅ `backend/src/index.ts` - Main backend server
-- ✅ `backend/src/simple-server.ts` - Simple backend server
-- ✅ `frontend/src/services/api.ts` - API base URL
-- ✅ `backend/env.example` - Environment variables
-- ✅ `scripts/setup-project.sh` - Setup documentation
-- ✅ `IMPLEMENTATION_SUMMARY.md` - Implementation docs
+- `frontend/package.json` - Frontend dev script
+- `backend/src/index.ts` - Main backend server
+- `backend/src/simple-server.ts` - Simple backend server
+- `frontend/src/services/api.ts` - API base URL
+- `backend/env.example` - Environment variables
+- `scripts/setup-project.sh` - Setup documentation
+- `IMPLEMENTATION_SUMMARY.md` - Implementation docs
 
-## **📋 Quick Reference**
+## **Quick Reference**
 
 ```bash
 # Start Frontend (Port 6001)

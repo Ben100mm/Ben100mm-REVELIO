@@ -69,10 +69,10 @@ app.get('/api/content', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Revelio API Server running on port ${PORT}`);
-  console.log(`📊 Health check: http://localhost:${PORT}/health`);
-  console.log(`👥 Creators API: http://localhost:${PORT}/api/creators`);
-  console.log(`📝 Content API: http://localhost:${PORT}/api/content`);
+  console.log(`Revelio API Server running on port ${PORT}`);
+  console.log(`Health check: http://localhost:${PORT}/health`);
+  console.log(`Creators API: http://localhost:${PORT}/api/creators`);
+  console.log(`Content API: http://localhost:${PORT}/api/content`);
 });
 
 export default app;

@@ -2,15 +2,15 @@
 
 > A creator-powered marketplace where writers, artists, and storytellers get paid for impact — blending authentic research with brand partnerships, distributed natively across social platforms.
 
-## 🎯 Vision Statement
+## Vision Statement
 
 "We are building a creator-powered marketplace where writers, artists, and storytellers get paid for impact — blending authentic research with brand partnerships, distributed natively across social platforms."
 
-## 🚀 One-Paragraph Pitch
+## One-Paragraph Pitch
 
 Our platform is a unified content marketplace that connects creators — including writers, video makers, and thought leaders — with audiences and brands. Creators produce both independent and branded content, seamlessly mixing authentic insights with sponsored campaigns. They are paid based on performance metrics like views, clicks, impressions, and traffic driven, ensuring incentives are aligned with quality and engagement. For brands, it's an efficient way to access expert-led, trust-based distribution across multiple formats and social channels. For creators, it's a fair monetization system that rewards impact, not just reach. For audiences, it delivers content that is both useful and trustworthy — not just ads.
 
-## 🏗️ Architecture
+## Architecture
 
 ### Core Components
 
@@ -29,7 +29,7 @@ Our platform is a unified content marketplace that connects creators — includi
 - **File Storage**: Local/Cloud storage for media
 - **Social APIs**: LinkedIn, Twitter/X, Instagram, TikTok integration
 
-## 📊 Business Model
+## Business Model
 
 ### Revenue Streams
 
@@ -45,13 +45,13 @@ Our platform is a unified content marketplace that connects creators — includi
 - **For Consumers**: High-quality, trustworthy content
 - **For Platform**: Scalable marketplace revenue stream
 
-## 🎨 Content Mix Strategy
+## Content Mix Strategy
 
 - **Paid Content**: Commissioned by brands, institutions, or platform
 - **Research Content**: Independent, value-adding pieces for credibility
 - **Seamless Blending**: Maintains authenticity while enabling monetization
 
-## 📈 Monetization Models
+## Monetization Models
 
 Creators earn through:
 - **CPM**: Cost per 1,000 impressions
@@ -60,7 +60,7 @@ Creators earn through:
 - **Revenue Share**: On affiliate links and product placements
 - **Engagement Bonuses**: For high-quality interactions
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -124,7 +124,7 @@ npm run dev
 └── scripts/               # Deployment and utility scripts
 ```
 
-## 🔧 Development
+## Development
 
 ### Available Scripts
 
@@ -144,7 +144,7 @@ npm run dev
 - `POST /api/content` - Create content
 - `GET /api/analytics` - Performance analytics
 
-## 🎯 Roadmap
+## Roadmap
 
 ### Phase 1: MVP (Current)
 - [x] Project structure and setup
@@ -167,7 +167,7 @@ npm run dev
 - [ ] Mobile applications
 - [ ] API for third-party integrations
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -175,11 +175,11 @@ npm run dev
 4. Add tests if applicable
 5. Submit a pull request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 📞 Contact
+## Contact
 
 For questions or support, please contact [your-email@domain.com]
 

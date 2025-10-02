@@ -2,7 +2,7 @@
 
 # Complete project setup script for Revelio Creator Marketplace
 
-echo "🚀 Setting up Revelio Creator Marketplace..."
+echo "Setting up Revelio Creator Marketplace..."
 
 # Colors for output
 RED='\033[0;31m'
@@ -120,26 +120,26 @@ npm run db:seed
 # Go back to root
 cd ..
 
-print_success "🎉 Project setup complete!"
+print_success "Project setup complete!"
 echo ""
-echo "📋 Next steps:"
+echo "Next steps:"
 echo "1. Update backend/.env with your database credentials"
 echo "2. Configure social media API keys in backend/.env"
 echo "3. Set up Stripe keys in backend/.env"
 echo "4. Run 'npm run dev' to start the development servers"
 echo ""
-echo "🔗 Access points:"
+echo "Access points:"
 echo "   Frontend: http://localhost:6001"
 echo "   Backend API: http://localhost:6002"
 echo "   Health check: http://localhost:6002/health"
 echo ""
-echo "👤 Sample accounts:"
+echo "Sample accounts:"
 echo "   Admin: admin@revelio.com / admin123"
 echo "   Creator: sarah@techwriter.com / creator123"
 echo "   Brand: marketing@techcorp.com / brand123"
 echo ""
-echo "📚 Documentation:"
+echo "Documentation:"
 echo "   README.md - Complete project documentation"
 echo "   API endpoints available at /api/*"
 echo ""
-print_success "Happy coding! 🚀"
+print_success "Happy coding!"
