@@ -221,6 +221,44 @@ export default function BrandWorkspace() {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
+        {/* Top App Bar */}
+        <header className="bg-slate-800/30 backdrop-blur-xl border-b border-slate-700/50 p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <h1 className="neo-heading-3 text-white">
+                {sidebarItems.find(item => item.id === activeTab)?.label || 'Brand Workspace'}
+              </h1>
+              <NeoBadge variant="info">
+                {brand?.status}
+              </NeoBadge>
+              <NeoBadge variant="secondary">
+                {brand?.type}
+              </NeoBadge>
+              {brand?.name === 'TechCorp Solutions' && (
+                <NeoBadge variant="accent" className="animate-pulse">
+                  DEMO MODE
+                </NeoBadge>
+              )}
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm font-bold">
+                    {brand?.name === 'TechCorp Solutions' ? 'TC' : 'JD'}
+                  </span>
+                </div>
+                <span className="neo-text-body text-slate-300">
+                  {brand?.name === 'TechCorp Solutions' ? 'TechCorp Admin' : 'John Doe'}
+                </span>
+              </div>
+              <NeoButton variant="ghost" size="sm">
+                Settings
+              </NeoButton>
+            </div>
+          </div>
+        </header>
+
         {/* Content Area */}
         <main className="flex-1 p-6 overflow-auto">
           {activeTab === 'overview' && (
