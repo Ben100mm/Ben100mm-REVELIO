@@ -13,14 +13,19 @@ import {
 import CreatorSelectionInterface from '../business/CreatorSelectionInterface';
 import AnalyticsDashboard from '../business/AnalyticsDashboard';
 import ContentApprovalWorkflow from '../business/ContentApprovalWorkflow';
+import CampaignManagement from '../brand/CampaignManagement';
+import CreatorDiscovery from '../brand/CreatorDiscovery';
+import PaymentManagement from '../brand/PaymentManagement';
+import ContractManagement from '../brand/ContractManagement';
 
-interface Business {
+interface Brand {
   id: string;
   name: string;
   description: string;
   logo: string;
   industry: string;
   status: string;
+  type: 'BRAND' | 'AGENCY' | 'ENTERPRISE';
 }
 
 interface WorkspaceStats {
@@ -28,10 +33,14 @@ interface WorkspaceStats {
   activeCampaigns: number;
   pendingApprovals: number;
   totalBudget: number;
+  totalEarnings: number;
+  contentPieces: number;
+  totalViews: number;
+  engagementRate: number;
 }
 
-export default function BusinessWorkspace() {
-  const [business, setBusiness] = useState<Business | null>(null);
+export default function BrandWorkspace() {
+  const [brand, setBrand] = useState<Brand | null>(null);
   const [stats, setStats] = useState<WorkspaceStats | null>(null);
   const [activeTab, setActiveTab] = useState('overview');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -39,24 +48,29 @@ export default function BusinessWorkspace() {
 
   // Mock data - replace with actual API calls
   useEffect(() => {
-    const mockBusiness: Business = {
+    const mockBrand: Brand = {
       id: '1',
       name: 'TechCorp Solutions',
       description: 'Leading technology solutions provider',
       logo: '/api/placeholder/100/100',
       industry: 'Technology',
-      status: 'ACTIVE'
+      status: 'ACTIVE',
+      type: 'BRAND'
     };
 
     const mockStats: WorkspaceStats = {
       totalCreators: 45,
       activeCampaigns: 8,
       pendingApprovals: 12,
-      totalBudget: 125000
+      totalBudget: 125000,
+      totalEarnings: 89000,
+      contentPieces: 156,
+      totalViews: 2500000,
+      engagementRate: 8.5
     };
 
     setTimeout(() => {
-      setBusiness(mockBusiness);
+      setBrand(mockBrand);
       setStats(mockStats);
       setLoading(false);
     }, 1000);
@@ -64,12 +78,14 @@ export default function BusinessWorkspace() {
 
   const sidebarItems = [
     { id: 'overview', label: 'Overview', icon: 'dashboard', description: 'Dashboard overview with stats and quick actions' },
-    { id: 'creators', label: 'Creator Selection', icon: 'people', description: 'AI matching & manual selection' },
+    { id: 'campaigns', label: 'Campaigns', icon: 'campaigns', description: 'Create and manage marketing campaigns' },
+    { id: 'creators', label: 'Creator Discovery', icon: 'people', description: 'Find and connect with creators' },
+    { id: 'creator-selection', label: 'Creator Selection', icon: 'selection', description: 'AI matching & manual selection' },
+    { id: 'payments', label: 'Payments', icon: 'payments', description: 'Manage payments and budgets' },
     { id: 'analytics', label: 'Analytics', icon: 'analytics', description: 'Real-time performance tracking' },
-    { id: 'messages', label: 'Messages', icon: 'messages', description: '3 panels: Message lists, Conversation window, person details' },
     { id: 'approval', label: 'Content Approval', icon: 'approval', description: 'Review and feedback system' },
-    { id: 'campaigns', label: 'Campaigns', icon: 'campaigns', description: 'Manage active campaigns' },
     { id: 'contracts', label: 'Contracts', icon: 'contracts', description: 'Contract management' },
+    { id: 'messages', label: 'Messages', icon: 'messages', description: '3 panels: Message lists, Conversation window, person details' },
     { id: 'settings', label: 'Settings', icon: 'settings', description: 'Workspace settings' }
   ];
 
@@ -93,13 +109,13 @@ export default function BusinessWorkspace() {
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
               <span className="text-white font-bold text-lg">
-                {business?.name?.charAt(0) || 'B'}
+                {brand?.name?.charAt(0) || 'B'}
               </span>
             </div>
             {!sidebarCollapsed && (
               <div>
-                <h2 className="neo-heading-4 text-white">{business?.name}</h2>
-                <p className="neo-text-small text-slate-400">{business?.industry}</p>
+                <h2 className="neo-heading-4 text-white">{brand?.name}</h2>
+                <p className="neo-text-small text-slate-400">{brand?.industry} • {brand?.type}</p>
               </div>
             )}
           </div>
@@ -128,6 +144,11 @@ export default function BusinessWorkspace() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
                 )}
+                {item.icon === 'selection' && (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                )}
                 {item.icon === 'analytics' && (
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -146,6 +167,11 @@ export default function BusinessWorkspace() {
                 {item.icon === 'contracts' && (
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                )}
+                {item.icon === 'payments' && (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                   </svg>
                 )}
                 {item.icon === 'messages' && (
@@ -191,10 +217,13 @@ export default function BusinessWorkspace() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <h1 className="neo-heading-3 text-white">
-                {sidebarItems.find(item => item.id === activeTab)?.label || 'Workspace'}
+                {sidebarItems.find(item => item.id === activeTab)?.label || 'Brand Workspace'}
               </h1>
               <NeoBadge variant="info">
-                {business?.status}
+                {brand?.status}
+              </NeoBadge>
+              <NeoBadge variant="secondary">
+                {brand?.type}
               </NeoBadge>
             </div>
             
@@ -251,6 +280,41 @@ export default function BusinessWorkspace() {
                 </NeoCard>
               </div>
 
+              {/* Additional Stats for Brand */}
+              <div className="neo-grid-4 neo-spacing-lg">
+                <NeoCard variant="glass" className="p-6 text-center">
+                  <div className="neo-heading-2 neo-text-holographic mb-2">
+                    ${stats?.totalEarnings?.toLocaleString()}
+                  </div>
+                  <div className="neo-text-body text-slate-300 mb-4">Total Earnings</div>
+                  <NeoProgress value={75} color="green" variant="crystal" />
+                </NeoCard>
+                
+                <NeoCard variant="glass" className="p-6 text-center">
+                  <div className="neo-heading-2 neo-text-holographic mb-2">
+                    {stats?.contentPieces}
+                  </div>
+                  <div className="neo-text-body text-slate-300 mb-4">Content Pieces</div>
+                  <NeoProgress value={88} color="blue" variant="energy" />
+                </NeoCard>
+                
+                <NeoCard variant="glass" className="p-6 text-center">
+                  <div className="neo-heading-2 neo-text-holographic mb-2">
+                    {stats?.totalViews?.toLocaleString()}
+                  </div>
+                  <div className="neo-text-body text-slate-300 mb-4">Total Views</div>
+                  <NeoProgress value={92} color="purple" variant="glow" />
+                </NeoCard>
+                
+                <NeoCard variant="glass" className="p-6 text-center">
+                  <div className="neo-heading-2 neo-text-holographic mb-2">
+                    {stats?.engagementRate}%
+                  </div>
+                  <div className="neo-text-body text-slate-300 mb-4">Engagement Rate</div>
+                  <NeoProgress value={stats?.engagementRate || 0} color="orange" variant="energy" />
+                </NeoCard>
+              </div>
+
               {/* Quick Actions */}
               <NeoCard variant="elevated" className="p-8">
                 <h3 className="neo-heading-3 text-white mb-6">Quick Actions</h3>
@@ -258,22 +322,22 @@ export default function BusinessWorkspace() {
                   <NeoButton 
                     variant="primary" 
                     className="h-20 flex flex-col items-center justify-center space-y-2"
+                    onClick={() => setActiveTab('campaigns')}
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <span>Create Campaign</span>
+                  </NeoButton>
+                  <NeoButton 
+                    variant="accent" 
+                    className="h-20 flex flex-col items-center justify-center space-y-2"
                     onClick={() => setActiveTab('creators')}
                   >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                     <span>Find Creators</span>
-                  </NeoButton>
-                  <NeoButton 
-                    variant="accent" 
-                    className="h-20 flex flex-col items-center justify-center space-y-2"
-                    onClick={() => setActiveTab('analytics')}
-                  >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                    <span>View Analytics</span>
                   </NeoButton>
                   <NeoButton 
                     variant="secondary" 
@@ -288,20 +352,25 @@ export default function BusinessWorkspace() {
                   <NeoButton 
                     variant="ghost" 
                     className="h-20 flex flex-col items-center justify-center space-y-2"
-                    onClick={() => setActiveTab('campaigns')}
+                    onClick={() => setActiveTab('payments')}
                   >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                     </svg>
-                    <span>Manage Campaigns</span>
+                    <span>Manage Payments</span>
                   </NeoButton>
                 </div>
               </NeoCard>
             </div>
           )}
 
-          {activeTab === 'creators' && <CreatorSelectionInterface />}
+          {activeTab === 'campaigns' && <CampaignManagement />}
+          {activeTab === 'creators' && <CreatorDiscovery />}
+          {activeTab === 'creator-selection' && <CreatorSelectionInterface />}
+          {activeTab === 'payments' && <PaymentManagement />}
           {activeTab === 'analytics' && <AnalyticsDashboard />}
+          {activeTab === 'contracts' && <ContractManagement />}
+          {activeTab === 'approval' && <ContentApprovalWorkflow />}
           {activeTab === 'messages' && (
             <div className="space-y-6">
               <h2 className="neo-heading-2 neo-text-glow">Messages</h2>
@@ -459,29 +528,10 @@ export default function BusinessWorkspace() {
               </div>
             </div>
           )}
-          {activeTab === 'approval' && <ContentApprovalWorkflow />}
-          
-          {activeTab === 'campaigns' && (
-            <div className="space-y-6">
-              <h2 className="neo-heading-2 neo-text-glow">Campaign Management</h2>
-              <NeoCard variant="glass" className="p-6">
-                <p className="neo-text-body text-slate-300">Campaign management interface coming soon...</p>
-              </NeoCard>
-            </div>
-          )}
-          
-          {activeTab === 'contracts' && (
-            <div className="space-y-6">
-              <h2 className="neo-heading-2 neo-text-glow">Contract Management</h2>
-              <NeoCard variant="glass" className="p-6">
-                <p className="neo-text-body text-slate-300">Contract management interface coming soon...</p>
-              </NeoCard>
-            </div>
-          )}
           
           {activeTab === 'settings' && (
             <div className="space-y-6">
-              <h2 className="neo-heading-2 neo-text-glow">Workspace Settings</h2>
+              <h2 className="neo-heading-2 neo-text-glow">Brand Settings</h2>
               <NeoCard variant="glass" className="p-6">
                 <p className="neo-text-body text-slate-300">Settings interface coming soon...</p>
               </NeoCard>

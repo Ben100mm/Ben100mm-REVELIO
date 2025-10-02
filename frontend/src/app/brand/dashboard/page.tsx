@@ -1,5 +1,5 @@
-import BusinessWorkspace from '@/components/layout/BusinessWorkspace';
+import BrandWorkspace from '@/components/layout/BrandWorkspace';
 
 export default function BrandDashboardPage() {
-  return <BusinessWorkspace />;
+  return <BrandWorkspace />;
 }

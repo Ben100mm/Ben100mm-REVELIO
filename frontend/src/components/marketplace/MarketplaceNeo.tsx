@@ -325,7 +325,7 @@ export default function MarketplaceNeo() {
                     : 'bg-slate-700'
                   }
                 `}
-                aria-label={`Switch to ${marketplaceType === 'creator' ? 'Business' : 'Creator'} Marketplace`}
+                aria-label={`Switch to ${marketplaceType === 'creator' ? 'Brand' : 'Creator'} Marketplace`}
               >
                 <div
                   className={`
@@ -337,7 +337,7 @@ export default function MarketplaceNeo() {
             </div>
 
             <h1 className="neo-heading-1 neo-text-holographic mb-4">
-              {marketplaceType === 'creator' ? 'Creator' : 'Business'}{' '}
+              {marketplaceType === 'creator' ? 'Creator' : 'Brand'}{' '}
               <span className="neo-text-glow">Marketplace</span>
             </h1>
             <p className="neo-text-large text-slate-300 max-w-3xl mx-auto">
