@@ -313,27 +313,27 @@ export default function MarketplaceNeo() {
       <div className="neo-container neo-section">
         {/* Header */}
         <section className="mb-8">
-          <NeoCard variant="elevated" glow className="p-8 text-center">
-            {/* Marketplace Type Toggle */}
-            <div className="mb-6">
-              <div className="inline-flex bg-slate-800/50 rounded-xl p-1">
-                <NeoButton
-                  variant={marketplaceType === 'creator' ? 'primary' : 'ghost'}
-                  size="sm"
-                  onClick={() => setMarketplaceType('creator')}
-                  className="px-6"
-                >
-                  Creator Marketplace
-                </NeoButton>
-                <NeoButton
-                  variant={marketplaceType === 'business' ? 'primary' : 'ghost'}
-                  size="sm"
-                  onClick={() => setMarketplaceType('business')}
-                  className="px-6"
-                >
-                  Business Marketplace
-                </NeoButton>
-              </div>
+          <NeoCard variant="elevated" glow className="p-8 text-center relative">
+            {/* Simple Toggle Switch - Top Right */}
+            <div className="absolute top-6 right-6">
+              <button
+                onClick={() => setMarketplaceType(marketplaceType === 'creator' ? 'business' : 'creator')}
+                className={`
+                  relative w-14 h-7 rounded-full transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500/50
+                  ${marketplaceType === 'creator' 
+                    ? 'bg-gradient-to-r from-blue-500 to-purple-600' 
+                    : 'bg-slate-700'
+                  }
+                `}
+                aria-label={`Switch to ${marketplaceType === 'creator' ? 'Business' : 'Creator'} Marketplace`}
+              >
+                <div
+                  className={`
+                    absolute top-1 left-1 w-5 h-5 bg-white rounded-full transition-transform duration-300 ease-in-out shadow-lg
+                    ${marketplaceType === 'creator' ? 'transform translate-x-7' : 'transform translate-x-0'}
+                  `}
+                />
+              </button>
             </div>
 
             <h1 className="neo-heading-1 neo-text-holographic mb-4">
