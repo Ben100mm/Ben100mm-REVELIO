@@ -1,31 +1,22 @@
 export default function Home() {
   return (
-    <main className="min-h-screen relative overflow-hidden">
-      {/* Animated Background - Using Usage Guide System */}
-      <div className="absolute inset-0 bg-primary-gradient opacity-90"></div>
-      <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5"></div>
-      
-      {/* Floating Elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-primary-400/20 to-accent-400/20 rounded-full blur-xl float-element"></div>
-      <div className="absolute top-40 right-20 w-32 h-32 bg-gradient-to-br from-accent-400/20 to-primary-400/20 rounded-full blur-2xl float-element" style={{animationDelay: '2s'}}></div>
-      <div className="absolute bottom-20 left-1/4 w-16 h-16 bg-gradient-to-br from-primary-300/20 to-accent-300/20 rounded-full blur-lg float-element" style={{animationDelay: '4s'}}></div>
+    <main className="min-h-screen relative">
+      {/* Clean background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
       
       <div className="relative z-10 container mx-auto px-4 py-16">
         {/* Hero Section */}
         <div className="text-center mb-20">
-          <div className="inline-block mb-8 relative">
-            {/* Subtle backdrop for better text visibility */}
-            <div className="absolute inset-0 bg-black/20 backdrop-blur-sm rounded-3xl -m-8"></div>
-            <h1 className="heading-1 text-white animate-fade-in relative z-10" style={{textShadow: '0 4px 8px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.4)'}}>
+          <div className="mb-8">
+            <h1 className="heading-1 text-white animate-fade-in">
               Welcome to{' '}
-              <span className="relative bg-gradient-to-r from-neon-cyan to-neon-purple bg-clip-text text-transparent" style={{textShadow: '0 0 30px rgba(0, 212, 255, 0.9), 0 0 60px rgba(131, 56, 236, 0.7)'}}>
+              <span className="bg-gradient-to-r from-neon-cyan to-neon-purple bg-clip-text text-transparent">
                 Revelio
-                <div className="absolute -inset-2 bg-gradient-to-r from-neon-cyan/30 to-neon-purple/30 rounded-2xl blur-xl animate-pulse-slow"></div>
               </span>
             </h1>
           </div>
           
-          <p className="text-xl md:text-2xl text-white mb-12 max-w-4xl mx-auto leading-relaxed animate-slide-up" style={{textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'}}>
+          <p className="text-xl md:text-2xl text-slate-200 mb-12 max-w-4xl mx-auto leading-relaxed animate-slide-up">
             A creator-powered marketplace where writers, artists, and storytellers get paid for impact — 
             blending authentic research with brand partnerships, distributed natively across social platforms.
           </p>
