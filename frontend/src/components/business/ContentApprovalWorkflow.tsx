@@ -254,7 +254,7 @@ export default function ContentApprovalWorkflow() {
   const getTypeIcon = (type: string) => {
     switch (type) {
       case 'video': return '🎥';
-      case 'image': return '🖼️';
+      case 'image': return '🖼';
       case 'article': return '📄';
       case 'story': return '📱';
       default: return '📄';
