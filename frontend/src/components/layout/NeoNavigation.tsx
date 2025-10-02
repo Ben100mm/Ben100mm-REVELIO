@@ -24,7 +24,7 @@ export default function NeoNavigation() {
   const isActive = (href: string) => pathname === href;
 
   return (
-    <nav className="sticky top-0 z-50 neo-glass relative">
+    <nav className="sticky top-0 z-50 neo-glass rounded-none relative">
       <div className="flex items-center h-16">
         {/* Logo - Extreme Left */}
         <Link href="/" className="flex items-center space-x-3 flex-shrink-0 pl-4 sm:pl-6 lg:pl-8">
