@@ -55,7 +55,12 @@ export default function RegisterFormNeo() {
         role: formData.userType.toUpperCase(),
       }));
       
-      router.push('/creator/dashboard');
+      // Redirect based on user type
+      if (formData.userType === 'brand') {
+        router.push('/brand/setup');
+      } else {
+        router.push('/creator/dashboard');
+      }
     } catch (err) {
       setError('Registration failed. Please try again.');
     } finally {

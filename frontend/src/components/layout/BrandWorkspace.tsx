@@ -17,6 +17,7 @@ import CampaignManagement from '../brand/CampaignManagement';
 import CreatorDiscovery from '../brand/CreatorDiscovery';
 import PaymentManagement from '../brand/PaymentManagement';
 import ContractManagement from '../brand/ContractManagement';
+import BriefManagement from '../brand/BriefManagement';
 
 interface Brand {
   id: string;
@@ -48,25 +49,29 @@ export default function BrandWorkspace() {
 
   // Mock data - replace with actual API calls
   useEffect(() => {
+    // Check if this is a demo brand login
+    const user = localStorage.getItem('user');
+    const isDemoBrand = user && JSON.parse(user).email === 'brand@revelio.com';
+
     const mockBrand: Brand = {
       id: '1',
-      name: 'TechCorp Solutions',
-      description: 'Leading technology solutions provider',
+      name: isDemoBrand ? 'TechCorp Solutions' : 'Your Brand',
+      description: isDemoBrand ? 'Leading technology solutions provider specializing in AI and cloud computing' : 'Your company description',
       logo: '/api/placeholder/100/100',
-      industry: 'Technology',
+      industry: isDemoBrand ? 'Technology' : 'Your Industry',
       status: 'ACTIVE',
       type: 'BRAND'
     };
 
     const mockStats: WorkspaceStats = {
-      totalCreators: 45,
-      activeCampaigns: 8,
-      pendingApprovals: 12,
-      totalBudget: 125000,
-      totalEarnings: 89000,
-      contentPieces: 156,
-      totalViews: 2500000,
-      engagementRate: 8.5
+      totalCreators: isDemoBrand ? 45 : 0,
+      activeCampaigns: isDemoBrand ? 8 : 0,
+      pendingApprovals: isDemoBrand ? 12 : 0,
+      totalBudget: isDemoBrand ? 125000 : 0,
+      totalEarnings: isDemoBrand ? 89000 : 0,
+      contentPieces: isDemoBrand ? 156 : 0,
+      totalViews: isDemoBrand ? 2500000 : 0,
+      engagementRate: isDemoBrand ? 8.5 : 0
     };
 
     setTimeout(() => {
@@ -78,6 +83,7 @@ export default function BrandWorkspace() {
 
   const sidebarItems = [
     { id: 'overview', label: 'Overview', icon: 'dashboard', description: 'Dashboard overview with stats and quick actions' },
+    { id: 'briefs', label: 'Briefs', icon: 'briefs', description: 'Create and manage content briefs' },
     { id: 'campaigns', label: 'Campaigns', icon: 'campaigns', description: 'Create and manage marketing campaigns' },
     { id: 'creators', label: 'Creator Discovery', icon: 'people', description: 'Find and connect with creators' },
     { id: 'creator-selection', label: 'Creator Selection', icon: 'selection', description: 'AI matching & manual selection' },
@@ -159,6 +165,11 @@ export default function BrandWorkspace() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 )}
+                {item.icon === 'briefs' && (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                )}
                 {item.icon === 'campaigns' && (
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -225,14 +236,23 @@ export default function BrandWorkspace() {
               <NeoBadge variant="secondary">
                 {brand?.type}
               </NeoBadge>
+              {brand?.name === 'TechCorp Solutions' && (
+                <NeoBadge variant="accent" className="animate-pulse">
+                  DEMO MODE
+                </NeoBadge>
+              )}
             </div>
             
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-bold">JD</span>
+                  <span className="text-white text-sm font-bold">
+                    {brand?.name === 'TechCorp Solutions' ? 'TC' : 'JD'}
+                  </span>
                 </div>
-                <span className="neo-text-body text-slate-300">John Doe</span>
+                <span className="neo-text-body text-slate-300">
+                  {brand?.name === 'TechCorp Solutions' ? 'TechCorp Admin' : 'John Doe'}
+                </span>
               </div>
               <NeoButton variant="ghost" size="sm">
                 Settings
@@ -322,6 +342,16 @@ export default function BrandWorkspace() {
                   <NeoButton 
                     variant="primary" 
                     className="h-20 flex flex-col items-center justify-center space-y-2"
+                    onClick={() => setActiveTab('briefs')}
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <span>Create Brief</span>
+                  </NeoButton>
+                  <NeoButton 
+                    variant="accent" 
+                    className="h-20 flex flex-col items-center justify-center space-y-2"
                     onClick={() => setActiveTab('campaigns')}
                   >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -330,7 +360,7 @@ export default function BrandWorkspace() {
                     <span>Create Campaign</span>
                   </NeoButton>
                   <NeoButton 
-                    variant="accent" 
+                    variant="secondary" 
                     className="h-20 flex flex-col items-center justify-center space-y-2"
                     onClick={() => setActiveTab('creators')}
                   >
@@ -338,16 +368,6 @@ export default function BrandWorkspace() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                     <span>Find Creators</span>
-                  </NeoButton>
-                  <NeoButton 
-                    variant="secondary" 
-                    className="h-20 flex flex-col items-center justify-center space-y-2"
-                    onClick={() => setActiveTab('approval')}
-                  >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Review Content</span>
                   </NeoButton>
                   <NeoButton 
                     variant="ghost" 
@@ -364,6 +384,7 @@ export default function BrandWorkspace() {
             </div>
           )}
 
+          {activeTab === 'briefs' && <BriefManagement />}
           {activeTab === 'campaigns' && <CampaignManagement />}
           {activeTab === 'creators' && <CreatorDiscovery />}
           {activeTab === 'creator-selection' && <CreatorSelectionInterface />}

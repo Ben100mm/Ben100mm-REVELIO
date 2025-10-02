@@ -160,7 +160,7 @@ export default function Home() {
 
         {/* CTA Section */}
         <section className="text-center">
-          <NeoCard variant="elevated" glow className="p-12 max-w-3xl mx-auto">
+          <NeoCard variant="elevated" glow className="p-12 max-w-4xl mx-auto">
             <h2 className="neo-heading-2 neo-text-holographic mb-6">
               Ready to{' '}
               <span className="neo-text-glow">Get Started</span>?
@@ -169,18 +169,81 @@ export default function Home() {
               Join the creator economy revolution and start earning based on real impact, not just follower count.
             </p>
             
-            <div className="neo-button-group neo-button-group-center mb-8">
-              <NeoButton variant="primary" size="lg" glow className="neo-touch-target">
-                Start Creating Today
-              </NeoButton>
-              <NeoButton variant="accent" size="lg" energy className="neo-touch-target">
-                Learn More
-              </NeoButton>
+            {/* User Type Selection */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              {/* Creator CTA */}
+              <NeoCard variant="interactive" className="p-8 text-center hover:scale-105 transition-transform duration-200">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                  </svg>
+                </div>
+                <h3 className="neo-heading-3 text-white mb-3">For Creators</h3>
+                <p className="neo-text-body text-slate-300 mb-6">
+                  Create authentic content and get paid based on real engagement and impact.
+                </p>
+                <NeoButton 
+                  variant="primary" 
+                  size="lg" 
+                  glow 
+                  className="w-full"
+                  onClick={() => window.location.href = '/auth/register?type=creator'}
+                >
+                  Sign Up as Creator
+                </NeoButton>
+              </NeoCard>
+
+              {/* Brand CTA */}
+              <NeoCard variant="interactive" className="p-8 text-center hover:scale-105 transition-transform duration-200">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <h3 className="neo-heading-3 text-white mb-3">For Businesses</h3>
+                <p className="neo-text-body text-slate-300 mb-6">
+                  Connect with verified creators and boost your content with authentic partnerships.
+                </p>
+                <NeoButton variant="accent" size="lg" energy className="w-full">
+                  Sign Up as Business
+                </NeoButton>
+              </NeoCard>
             </div>
             
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4 mb-6">
               <NeoBadge variant="success">Free to Start</NeoBadge>
               <NeoBadge variant="info">No Credit Card Required</NeoBadge>
+            </div>
+
+            {/* Demo Access */}
+            <div className="text-center">
+              <p className="neo-text-small text-slate-400 mb-3">
+                Want to explore first? Try our demo workspaces
+              </p>
+              <div className="flex flex-wrap justify-center gap-3">
+                <NeoButton 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => window.location.href = '/auth/login'}
+                  className="text-blue-400 hover:text-blue-300"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  Creator Demo
+                </NeoButton>
+                <NeoButton 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => window.location.href = '/auth/login'}
+                  className="text-purple-400 hover:text-purple-300"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                  Brand Demo
+                </NeoButton>
+              </div>
             </div>
           </NeoCard>
         </section>

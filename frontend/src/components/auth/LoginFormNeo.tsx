@@ -29,16 +29,31 @@ export default function LoginFormNeo() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
+      // Determine user type based on email
+      let userRole = 'CREATOR';
+      let userName = 'John Doe';
+      let redirectPath = '/creator/dashboard';
+
+      if (formData.email === 'brand@revelio.com') {
+        userRole = 'BRAND';
+        userName = 'TechCorp Solutions';
+        redirectPath = '/brand/dashboard';
+      } else if (formData.email === 'demo@revelio.com') {
+        userRole = 'CREATOR';
+        userName = 'Demo Creator';
+        redirectPath = '/creator/dashboard';
+      }
+      
       // Mock successful login
       localStorage.setItem('token', 'mock-token');
       localStorage.setItem('user', JSON.stringify({
         id: '1',
         email: formData.email,
-        role: 'CREATOR',
-        name: 'John Doe'
+        role: userRole,
+        name: userName
       }));
       
-      router.push('/creator/dashboard');
+      router.push(redirectPath);
     } catch (err) {
       setError('Invalid email or password');
     } finally {
@@ -49,6 +64,17 @@ export default function LoginFormNeo() {
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     if (error) setError(''); // Clear error when user starts typing
+  };
+
+  const handleDemoLogin = (email: string, password: string) => {
+    setFormData({ email, password });
+    // Auto-submit after setting credentials
+    setTimeout(() => {
+      const form = document.querySelector('form');
+      if (form) {
+        form.requestSubmit();
+      }
+    }, 100);
   };
 
   return (
@@ -186,14 +212,62 @@ export default function LoginFormNeo() {
             <svg className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <div>
-              <h4 className="neo-text-small font-semibold text-white mb-1">Demo Credentials</h4>
-              <p className="neo-text-small text-slate-300 mb-2">
-                Use these credentials to explore the platform:
+            <div className="flex-1">
+              <h4 className="neo-text-small font-semibold text-white mb-2">Demo Credentials</h4>
+              <p className="neo-text-small text-slate-300 mb-3">
+                Use these credentials to explore different workspaces:
               </p>
-              <div className="space-y-1">
-                <NeoBadge variant="info" size="sm">Email: demo@revelio.com</NeoBadge>
-                <NeoBadge variant="info" size="sm">Password: demo123</NeoBadge>
+              
+              {/* Creator Demo */}
+              <div className="mb-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                      <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                    <span className="neo-text-small font-medium text-white">Creator Workspace</span>
+                  </div>
+                  <NeoButton
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleDemoLogin('demo@revelio.com', 'demo123')}
+                    className="text-xs px-2 py-1"
+                  >
+                    Try Demo
+                  </NeoButton>
+                </div>
+                <div className="space-y-1 ml-8">
+                  <NeoBadge variant="info" size="sm">Email: demo@revelio.com</NeoBadge>
+                  <NeoBadge variant="info" size="sm">Password: demo123</NeoBadge>
+                </div>
+              </div>
+
+              {/* Brand Demo */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center">
+                      <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                      </svg>
+                    </div>
+                    <span className="neo-text-small font-medium text-white">Brand Workspace</span>
+                  </div>
+                  <NeoButton
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleDemoLogin('brand@revelio.com', 'demo123')}
+                    className="text-xs px-2 py-1"
+                  >
+                    Try Demo
+                  </NeoButton>
+                </div>
+                <div className="space-y-1 ml-8">
+                  <NeoBadge variant="accent" size="sm">Email: brand@revelio.com</NeoBadge>
+                  <NeoBadge variant="accent" size="sm">Password: demo123</NeoBadge>
+                </div>
               </div>
             </div>
           </div>
