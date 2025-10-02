@@ -15,6 +15,7 @@ export default function NeoNavigation() {
 
   const navigation = [
     { name: 'Home', href: '/' },
+    { name: 'Marketplace', href: '/marketplace' },
     { name: 'Features', href: '/features' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'About', href: '/about' },

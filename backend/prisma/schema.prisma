@@ -58,6 +58,8 @@ model Creator {
   campaigns   Campaign[]
   earnings    CreatorEarning[]
   socialLinks SocialLink[]
+  briefApplications BriefApplication[]
+  contracts   Contract[]
 
   @@map("creators")
 }
@@ -77,6 +79,8 @@ model Brand {
   // Relations
   user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   campaigns Campaign[]
+  briefs   Brief[]
+  contracts Contract[]
 
   @@map("brands")
 }
@@ -101,6 +105,7 @@ model Content {
   brand       Brand?         @relation(fields: [brandId], references: [id])
   performance ContentPerformance[]
   distributions ContentDistribution[]
+  reviews    ContentReview[]
 
   @@map("content")
 }
@@ -192,6 +197,130 @@ model SocialLink {
   @@map("social_links")
 }
 
+// New models for business workflows
+
+model Brief {
+  id          String      @id @default(cuid())
+  brandId     String
+  title       String
+  description String
+  requirements Json       // Detailed requirements, guidelines, assets
+  budget      Decimal
+  deadline    DateTime?
+  status      BriefStatus @default(DRAFT)
+  isPublic    Boolean     @default(false) // For marketplace vs private
+  tags        String[]
+  platforms   String[]    // Target platforms
+  contentType ContentType
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  // Relations
+  brand        Brand             @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  applications BriefApplication[]
+  contracts    Contract[]
+
+  @@map("briefs")
+}
+
+model BriefApplication {
+  id          String                @id @default(cuid())
+  briefId     String
+  creatorId   String
+  proposal    String                 // Creator's proposal
+  budget      Decimal                // Creator's proposed budget
+  timeline    String?                // Proposed timeline
+  status      ApplicationStatus      @default(PENDING)
+  message     String?                // Additional message from creator
+  createdAt   DateTime               @default(now())
+  updatedAt   DateTime               @updatedAt
+
+  // Relations
+  brief   Brief   @relation(fields: [briefId], references: [id], onDelete: Cascade)
+  creator Creator @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  @@map("brief_applications")
+}
+
+model Contract {
+  id          String         @id @default(cuid())
+  briefId     String
+  creatorId   String
+  brandId     String
+  title       String
+  description String
+  terms       Json            // Contract terms and conditions
+  deliverables Json           // Deliverable specifications
+  totalAmount Decimal
+  status      ContractStatus  @default(DRAFT)
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  // Relations
+  brief        Brief           @relation(fields: [briefId], references: [id], onDelete: Cascade)
+  creator      Creator        @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  brand        Brand          @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  milestones   Milestone[]
+  escrowPayments EscrowPayment[]
+
+  @@map("contracts")
+}
+
+model Milestone {
+  id          String         @id @default(cuid())
+  contractId  String
+  title       String
+  description String
+  amount      Decimal
+  status      MilestoneStatus @default(PENDING)
+  dueDate     DateTime?
+  completedAt DateTime?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  // Relations
+  contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  @@map("milestones")
+}
+
+model EscrowPayment {
+  id          String           @id @default(cuid())
+  contractId  String
+  amount      Decimal
+  status      EscrowStatus     @default(HELD)
+  stripePaymentIntentId String?
+  releaseReason String?        // Reason for release
+  releasedAt  DateTime?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  // Relations
+  contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  @@map("escrow_payments")
+}
+
+model ContentReview {
+  id          String           @id @default(cuid())
+  contentId   String
+  contractId  String?
+  reviewerId  String           // Brand user ID
+  status      ReviewStatus      @default(PENDING)
+  feedback    String?
+  rating      Int?              // 1-5 rating
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  // Relations
+  content  Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  contract Contract? @relation(fields: [contractId], references: [id])
+
+  @@map("content_reviews")
+}
+
 // Enums
 enum UserRole {
   CREATOR
@@ -253,4 +382,50 @@ enum EarningType {
   REVENUE_SHARE
   BONUS
   COMMISSION
+}
+
+// New enums for business workflows
+enum BriefStatus {
+  DRAFT
+  PUBLISHED
+  CLOSED
+  CANCELLED
+}
+
+enum ApplicationStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  WITHDRAWN
+}
+
+enum ContractStatus {
+  DRAFT
+  PENDING_SIGNATURE
+  ACTIVE
+  COMPLETED
+  CANCELLED
+  DISPUTED
+}
+
+enum MilestoneStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  APPROVED
+  REJECTED
+}
+
+enum EscrowStatus {
+  HELD
+  RELEASED
+  REFUNDED
+  DISPUTED
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  REVISION_REQUESTED
 }

@@ -15,6 +15,10 @@ import contentRoutes from '@/routes/content';
 import campaignRoutes from '@/routes/campaigns';
 import analyticsRoutes from '@/routes/analytics';
 import paymentRoutes from '@/routes/payments';
+import briefRoutes from '@/routes/briefs';
+import briefApplicationRoutes from '@/routes/briefApplications';
+import contractRoutes from '@/routes/contracts';
+import escrowRoutes from '@/routes/escrow';
 
 // Load environment variables
 dotenv.config();
@@ -64,6 +68,10 @@ app.use('/api/content', contentRoutes);
 app.use('/api/campaigns', campaignRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/payments', paymentRoutes);
+app.use('/api/briefs', briefRoutes);
+app.use('/api/brief-applications', briefApplicationRoutes);
+app.use('/api/contracts', contractRoutes);
+app.use('/api/escrow', escrowRoutes);
 
 // Error handling middleware
 app.use(notFoundHandler);
