@@ -1,0 +1,256 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      UserRole @default(CREATOR)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  creator   Creator?
+  brand     Brand?
+  sessions  Session[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model Creator {
+  id          String        @id @default(cuid())
+  userId      String        @unique
+  username    String        @unique
+  displayName String
+  bio         String?
+  avatar      String?
+  website     String?
+  location    String?
+  isVerified  Boolean       @default(false)
+  status      CreatorStatus @default(PENDING)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relations
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content     Content[]
+  campaigns   Campaign[]
+  earnings    CreatorEarning[]
+  socialLinks SocialLink[]
+
+  @@map("creators")
+}
+
+model Brand {
+  id          String     @id @default(cuid())
+  userId      String     @unique
+  name        String
+  description String?
+  logo        String?
+  website     String?
+  industry    String?
+  status      BrandStatus @default(PENDING)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  // Relations
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  campaigns Campaign[]
+
+  @@map("brands")
+}
+
+model Content {
+  id          String        @id @default(cuid())
+  creatorId   String
+  title       String
+  content     String
+  type        ContentType
+  status      ContentStatus @default(DRAFT)
+  isSponsored Boolean       @default(false)
+  brandId     String?
+  tags        String[]
+  metadata    Json?
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relations
+  creator     Creator        @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  brand       Brand?         @relation(fields: [brandId], references: [id])
+  performance ContentPerformance[]
+  distributions ContentDistribution[]
+
+  @@map("content")
+}
+
+model Campaign {
+  id          String         @id @default(cuid())
+  brandId     String
+  creatorId   String
+  title       String
+  description String
+  budget      Decimal
+  status      CampaignStatus @default(DRAFT)
+  startDate   DateTime?
+  endDate     DateTime?
+  requirements Json?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  // Relations
+  brand   Brand   @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  creator Creator @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  @@map("campaigns")
+}
+
+model ContentPerformance {
+  id          String   @id @default(cuid())
+  contentId   String
+  platform    String
+  views       Int      @default(0)
+  clicks      Int      @default(0)
+  shares      Int      @default(0)
+  comments    Int      @default(0)
+  likes       Int      @default(0)
+  revenue     Decimal  @default(0)
+  date        DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  // Relations
+  content Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@map("content_performance")
+}
+
+model ContentDistribution {
+  id          String   @id @default(cuid())
+  contentId   String
+  platform    String
+  platformId  String?
+  url         String?
+  status      DistributionStatus @default(PENDING)
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  content Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@map("content_distributions")
+}
+
+model CreatorEarning {
+  id          String   @id @default(cuid())
+  creatorId   String
+  amount      Decimal
+  type        EarningType
+  description String?
+  contentId   String?
+  date        DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  // Relations
+  creator Creator @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  @@map("creator_earnings")
+}
+
+model SocialLink {
+  id        String @id @default(cuid())
+  creatorId String
+  platform  String
+  url       String
+  isActive  Boolean @default(true)
+  createdAt DateTime @default(now())
+
+  // Relations
+  creator Creator @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  @@map("social_links")
+}
+
+// Enums
+enum UserRole {
+  CREATOR
+  BRAND
+  ADMIN
+}
+
+enum CreatorStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+  REJECTED
+}
+
+enum BrandStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+  REJECTED
+}
+
+enum ContentType {
+  ARTICLE
+  VIDEO
+  PODCAST
+  SOCIAL_POST
+  INFOGRAPHIC
+  THREAD
+  CAROUSEL
+}
+
+enum ContentStatus {
+  DRAFT
+  PENDING_REVIEW
+  APPROVED
+  PUBLISHED
+  REJECTED
+}
+
+enum CampaignStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  COMPLETED
+  CANCELLED
+}
+
+enum DistributionStatus {
+  PENDING
+  PUBLISHED
+  FAILED
+  DELETED
+}
+
+enum EarningType {
+  CPM
+  CPC
+  CPV
+  REVENUE_SHARE
+  BONUS
+  COMMISSION
+}
