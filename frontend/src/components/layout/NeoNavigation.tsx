@@ -34,8 +34,8 @@ export default function NeoNavigation() {
           <span className="neo-heading-4 neo-text-holographic">Revelio</span>
         </Link>
 
-        {/* Center Navigation */}
-        <div className="hidden md:flex items-center justify-center flex-1 space-x-1 mx-8">
+        {/* Center Navigation - Absolutely Centered */}
+        <div className="hidden md:flex items-center space-x-1 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
           {navigation.map((item) => (
             <Link
               key={item.name}
