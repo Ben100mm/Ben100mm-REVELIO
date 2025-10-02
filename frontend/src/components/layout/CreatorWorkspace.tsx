@@ -80,8 +80,9 @@ export default function CreatorWorkspace() {
   }, []);
 
   const sidebarItems = [
-    { id: 'overview', label: 'Overview', icon: 'dashboard', description: 'Dashboard overview' },
+    { id: 'overview', label: 'Overview', icon: 'dashboard', description: 'Dashboard overview with earnings and activity' },
     { id: 'content', label: 'Content Hub', icon: 'content', description: 'Create and manage content' },
+    { id: 'messages', label: 'Messages', icon: 'messages', description: '3 panels: Message lists, Conversation window, person details' },
     { id: 'analytics', label: 'Analytics', icon: 'analytics', description: 'Performance insights' },
     { id: 'earnings', label: 'Earnings', icon: 'earnings', description: 'Track your income' },
     { id: 'campaigns', label: 'Campaigns', icon: 'campaigns', description: 'Manage partnerships' },
@@ -168,6 +169,11 @@ export default function CreatorWorkspace() {
                 {item.icon === 'collaborations' && (
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                )}
+                {item.icon === 'messages' && (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
                 )}
                 {item.icon === 'settings' && (
@@ -363,6 +369,169 @@ export default function CreatorWorkspace() {
           )}
 
           {activeTab === 'content' && <ContentCreationHub />}
+          {activeTab === 'messages' && (
+            <div className="space-y-6">
+              <h2 className="neo-heading-2 neo-text-glow">Messages</h2>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[600px]">
+                {/* Message Lists Panel */}
+                <NeoCard variant="glass" className="p-4">
+                  <h3 className="neo-heading-4 text-white mb-4">Conversations</h3>
+                  <div className="space-y-2">
+                    <div className="p-3 neo-glass rounded-lg cursor-pointer hover:bg-slate-700/30">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                          <span className="text-white text-sm font-bold">TC</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="neo-text-body text-white font-medium">TechCorp Solutions</div>
+                          <div className="neo-text-small text-slate-400">iPhone 15 Pro Review Campaign</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="neo-text-small text-slate-400">2m ago</div>
+                          <div className="w-2 h-2 bg-blue-500 rounded-full mt-1"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-3 neo-glass rounded-lg cursor-pointer hover:bg-slate-700/30">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center">
+                          <span className="text-white text-sm font-bold">LB</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="neo-text-body text-white font-medium">LifestyleBrand</div>
+                          <div className="neo-text-small text-slate-400">Partnership Opportunity</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="neo-text-small text-slate-400">1h ago</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-3 neo-glass rounded-lg cursor-pointer hover:bg-slate-700/30">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                          <span className="text-white text-sm font-bold">AP</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="neo-text-body text-white font-medium">Apple Inc.</div>
+                          <div className="neo-text-small text-slate-400">MacBook Air M3 Performance Test</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="neo-text-small text-slate-400">3h ago</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </NeoCard>
+
+                {/* Conversation Window Panel */}
+                <NeoCard variant="glass" className="p-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="neo-heading-4 text-white">TechCorp Solutions</h3>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span className="neo-text-small text-slate-400">Online</span>
+                    </div>
+                  </div>
+                  <div className="space-y-4 h-80 overflow-y-auto">
+                    <div className="flex justify-start">
+                      <div className="bg-slate-700 text-white p-3 rounded-lg max-w-xs">
+                        <p className="neo-text-small">Hi! I've finished the unboxing and first impressions. Should have the full review ready by tomorrow.</p>
+                        <span className="neo-text-small text-slate-400">2:30 PM</span>
+                      </div>
+                    </div>
+                    <div className="flex justify-end">
+                      <div className="bg-blue-500 text-white p-3 rounded-lg max-w-xs">
+                        <p className="neo-text-small">Perfect! How's the iPhone 15 Pro review coming along?</p>
+                        <span className="neo-text-small text-blue-200">2:32 PM</span>
+                      </div>
+                    </div>
+                    <div className="flex justify-start">
+                      <div className="bg-slate-700 text-white p-3 rounded-lg max-w-xs">
+                        <p className="neo-text-small">Great! I've finished the unboxing and first impressions. Should have the full review ready by tomorrow.</p>
+                        <span className="neo-text-small text-slate-400">2:33 PM</span>
+                      </div>
+                    </div>
+                    <div className="flex justify-end">
+                      <div className="bg-blue-500 text-white p-3 rounded-lg max-w-xs">
+                        <p className="neo-text-small">Excellent! Don't forget to highlight the A17 Pro chip performance.</p>
+                        <span className="neo-text-small text-blue-200">2:34 PM</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-4 flex space-x-2">
+                    <input 
+                      type="text" 
+                      placeholder="Type a message..." 
+                      className="flex-1 bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-purple-500"
+                    />
+                    <NeoButton variant="primary" size="sm">Send</NeoButton>
+                  </div>
+                </NeoCard>
+
+                {/* Person Details Panel */}
+                <NeoCard variant="glass" className="p-4">
+                  <div className="text-center mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <span className="text-white text-xl font-bold">TC</span>
+                    </div>
+                    <h3 className="neo-heading-4 text-white">TechCorp Solutions</h3>
+                    <p className="neo-text-small text-slate-400">@techcorp_official</p>
+                    <div className="flex items-center justify-center space-x-2 mt-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span className="neo-text-small text-green-400">Online</span>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="neo-text-body text-white font-medium mb-2">Campaign Details</h4>
+                      <div className="space-y-2">
+                        <div className="flex justify-between">
+                          <span className="neo-text-small text-slate-400">Campaign:</span>
+                          <span className="neo-text-small text-white">iPhone 15 Pro Review</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="neo-text-small text-slate-400">Budget:</span>
+                          <span className="neo-text-small text-white">$5,000</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="neo-text-small text-slate-400">Status:</span>
+                          <NeoBadge variant="success" size="sm">Active</NeoBadge>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="neo-text-body text-white font-medium mb-2">Your Performance</h4>
+                      <div className="space-y-2">
+                        <div className="flex justify-between">
+                          <span className="neo-text-small text-slate-400">Content Delivered:</span>
+                          <span className="neo-text-small text-white">2/4</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="neo-text-small text-slate-400">Engagement Rate:</span>
+                          <span className="neo-text-small text-white">8.5%</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="neo-text-small text-slate-400">Total Views:</span>
+                          <span className="neo-text-small text-white">125K</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-4 border-t border-slate-700">
+                      <NeoButton variant="primary" className="w-full mb-2">
+                        View Campaign
+                      </NeoButton>
+                      <NeoButton variant="ghost" className="w-full">
+                        View Brand Profile
+                      </NeoButton>
+                    </div>
+                  </div>
+                </NeoCard>
+              </div>
+            </div>
+          )}
           {activeTab === 'analytics' && <PerformanceAnalytics />}
           {activeTab === 'earnings' && <EarningsTracker />}
           {activeTab === 'campaigns' && <CampaignManager />}
