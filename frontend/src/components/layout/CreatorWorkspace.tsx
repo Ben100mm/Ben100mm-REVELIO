@@ -124,7 +124,7 @@ export default function CreatorWorkspace() {
         </div>
 
         {/* Sidebar Navigation */}
-        <nav className="flex-1 p-4 space-y-2">
+        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
           {sidebarItems.map((item) => (
             <button
               key={item.id}
