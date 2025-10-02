@@ -52,7 +52,7 @@ export default function NeoNavigation() {
         </div>
 
         {/* Desktop Actions - Extreme Right */}
-        <div className="hidden md:flex items-center space-x-4 flex-shrink-0 pr-4 sm:pr-6 lg:pr-8">
+        <div className="hidden md:flex items-center space-x-4 flex-shrink-0 mr-0">
           <Link href="/auth/login">
             <NeoButton variant="ghost" size="sm">
               Sign In
@@ -67,7 +67,7 @@ export default function NeoNavigation() {
 
         {/* Mobile Menu Button - Extreme Right */}
         <button
-          className="md:hidden p-2 text-slate-300 hover:text-white transition-colors duration-200 flex-shrink-0 ml-auto mr-4 sm:mr-6 lg:mr-8"
+          className="md:hidden p-2 text-slate-300 hover:text-white transition-colors duration-200 flex-shrink-0 ml-auto mr-0"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle mobile menu"
         >
