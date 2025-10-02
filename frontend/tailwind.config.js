@@ -8,44 +8,65 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Primary Brand Colors (Cyan → Blue → Purple)
         primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-          950: '#082f49',
+          50: '#f0fdff',
+          100: '#ccf7fe',
+          200: '#99eefd',
+          300: '#66e5fc',
+          400: '#33dcfb',
+          500: '#00D4FF', // Neon Cyan
+          600: '#00aacc',
+          700: '#008099',
+          800: '#005666',
+          900: '#002c33',
         },
         secondary: {
-          50: '#fafafa',
-          100: '#f4f4f5',
-          200: '#e4e4e7',
-          300: '#d4d4d8',
-          400: '#a1a1aa',
-          500: '#71717a',
-          600: '#52525b',
-          700: '#3f3f46',
-          800: '#27272a',
-          900: '#18181b',
-          950: '#09090b',
+          50: '#f0f4ff',
+          100: '#e0e9ff',
+          200: '#c1d3ff',
+          300: '#a2bdff',
+          400: '#83a7ff',
+          500: '#3A86FF', // Primary Blue
+          600: '#2e6bcc',
+          700: '#225099',
+          800: '#173566',
+          900: '#0b1a33',
         },
         accent: {
-          50: '#fdf4ff',
-          100: '#fae8ff',
-          200: '#f5d0fe',
-          300: '#f0abfc',
-          400: '#e879f9',
-          500: '#d946ef',
-          600: '#c026d3',
-          700: '#a21caf',
-          800: '#86198f',
-          900: '#701a75',
-          950: '#4a044e',
+          50: '#faf5ff',
+          100: '#f5ebff',
+          200: '#ebd7ff',
+          300: '#e1c3ff',
+          400: '#d7afff',
+          500: '#8338EC', // Neon Purple
+          600: '#692dba',
+          700: '#4f2287',
+          800: '#351754',
+          900: '#1b0c21',
+        },
+        // Creative Gradient Colors (Gold → Pink → Violet)
+        creative: {
+          gold: '#FFD700',
+          pink: '#FF6B9D',
+          violet: '#8B5CF6',
+        },
+        // Chart & Data Visualization Colors
+        chart: {
+          cyan: '#00D4FF',
+          blue: '#3A86FF',
+          purple: '#8338EC',
+          pink: '#F72585',
+        },
+        // Dark Mode Colors
+        dark: {
+          violet: '#1A1240',
+          slate: '#18181b',
+        },
+        // Neon Accent Colors
+        neon: {
+          cyan: '#00D4FF',
+          purple: '#8338EC',
         },
       },
       fontFamily: {
@@ -89,6 +110,17 @@ module.exports = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        // Primary Brand Gradients
+        'primary-gradient': 'linear-gradient(135deg, #00D4FF 0%, #3A86FF 50%, #8338EC 100%)',
+        'primary-gradient-horizontal': 'linear-gradient(90deg, #00D4FF 0%, #3A86FF 50%, #8338EC 100%)',
+        // Creative Gradients
+        'creative-gradient': 'linear-gradient(135deg, #FFD700 0%, #FF6B9D 50%, #8B5CF6 100%)',
+        'creative-gradient-horizontal': 'linear-gradient(90deg, #FFD700 0%, #FF6B9D 50%, #8B5CF6 100%)',
+        // Secondary Gradients
+        'secondary-gradient': 'linear-gradient(135deg, #00D4FF 0%, #3A86FF 100%)',
+        'text-gradient-primary': 'linear-gradient(135deg, #00D4FF 0%, #8338EC 100%)',
+        'text-gradient-creative': 'linear-gradient(135deg, #FFD700 0%, #8B5CF6 100%)',
+        // Legacy gradients (keeping for compatibility)
         'mesh-gradient': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         'aurora': 'linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57)',
       },
@@ -105,6 +137,7 @@ module.exports = {
         'slide-down': 'slide-down 0.5s ease-out',
         'scale-in': 'scale-in 0.3s ease-out',
         'wiggle': 'wiggle 1s ease-in-out infinite',
+        'gradient-flow': 'gradient-flow 15s ease infinite',
       },
       keyframes: {
         float: {
@@ -160,6 +193,10 @@ module.exports = {
         wiggle: {
           '0%, 100%': { transform: 'rotate(-3deg)' },
           '50%': { transform: 'rotate(3deg)' },
+        },
+        'gradient-flow': {
+          '0%, 100%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
         },
       },
       backdropBlur: {

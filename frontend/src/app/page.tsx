@@ -1,9 +1,9 @@
 export default function Home() {
   return (
     <main className="min-h-screen relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-mesh opacity-20"></div>
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-50/30 via-transparent to-accent-50/30"></div>
+      {/* Animated Background - Using Usage Guide System */}
+      <div className="absolute inset-0 bg-primary-gradient opacity-90"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5"></div>
       
       {/* Floating Elements */}
       <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-primary-400/20 to-accent-400/20 rounded-full blur-xl float-element"></div>
@@ -23,19 +23,17 @@ export default function Home() {
             </h1>
           </div>
           
-          <p className="text-xl md:text-2xl text-slate-600 mb-12 max-w-4xl mx-auto leading-relaxed animate-slide-up">
+          <p className="text-xl md:text-2xl text-white mb-12 max-w-4xl mx-auto leading-relaxed animate-slide-up" style={{textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'}}>
             A creator-powered marketplace where writers, artists, and storytellers get paid for impact — 
             blending authentic research with brand partnerships, distributed natively across social platforms.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-scale-in" style={{animationDelay: '0.3s'}}>
-            <button className="btn-primary text-lg px-10 py-4 group">
-              <span className="relative z-10">Get Started as Creator</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-accent-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <button className="btn-primary-cta text-lg px-10 py-4">
+              Get Started as Creator
             </button>
-            <button className="btn-accent text-lg px-10 py-4 group">
-              <span className="relative z-10">Find Creators</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-accent-600 to-primary-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <button className="btn-secondary-cta text-lg px-10 py-4">
+              Find Creators
             </button>
           </div>
         </div>
