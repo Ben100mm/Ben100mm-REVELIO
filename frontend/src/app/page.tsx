@@ -33,14 +33,6 @@ export default function Home() {
             blending authentic research with brand partnerships, distributed natively across social platforms.
           </p>
           
-          <div className="neo-button-group-stacked neo-button-group-center neo-animate-scale-in" style={{animationDelay: '0.3s'}}>
-            <NeoButton variant="primary" size="lg" glow className="neo-touch-target">
-              Get Started as Creator
-            </NeoButton>
-            <NeoButton variant="secondary" size="lg" className="neo-touch-target">
-              Find Creators
-            </NeoButton>
-          </div>
         </section>
         
         {/* Key Benefits Section */}
