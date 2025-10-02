@@ -72,7 +72,7 @@ export default function Home() {
                 actually helps your audience instead of shallow promotional posts.
               </p>
               <NeoButton variant="accent" size="md" energy>
-                Find Creators
+                Advertise requirements
               </NeoButton>
             </NeoCard>
           </div>
