@@ -114,14 +114,12 @@ export default function BrandWorkspace() {
         <div className="p-6 border-b border-slate-700/50">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-lg">
-                {brand?.name?.charAt(0) || 'B'}
-              </span>
+              <span className="text-white font-bold text-lg">R</span>
             </div>
             {!sidebarCollapsed && (
               <div>
-                <h2 className="neo-heading-4 text-white">{brand?.name}</h2>
-                <p className="neo-text-small text-slate-400">{brand?.industry} • {brand?.type}</p>
+                <h2 className="neo-heading-4 text-white">Revelio</h2>
+                <p className="neo-text-small text-slate-400">Brand Platform</p>
               </div>
             )}
           </div>
@@ -223,44 +221,6 @@ export default function BrandWorkspace() {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
-        {/* Top App Bar */}
-        <header className="bg-slate-800/30 backdrop-blur-xl border-b border-slate-700/50 p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <h1 className="neo-heading-3 text-white">
-                {sidebarItems.find(item => item.id === activeTab)?.label || 'Brand Workspace'}
-              </h1>
-              <NeoBadge variant="info">
-                {brand?.status}
-              </NeoBadge>
-              <NeoBadge variant="secondary">
-                {brand?.type}
-              </NeoBadge>
-              {brand?.name === 'TechCorp Solutions' && (
-                <NeoBadge variant="accent" className="animate-pulse">
-                  DEMO MODE
-                </NeoBadge>
-              )}
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-bold">
-                    {brand?.name === 'TechCorp Solutions' ? 'TC' : 'JD'}
-                  </span>
-                </div>
-                <span className="neo-text-body text-slate-300">
-                  {brand?.name === 'TechCorp Solutions' ? 'TechCorp Admin' : 'John Doe'}
-                </span>
-              </div>
-              <NeoButton variant="ghost" size="sm">
-                Settings
-              </NeoButton>
-            </div>
-          </div>
-        </header>
-
         {/* Content Area */}
         <main className="flex-1 p-6 overflow-auto">
           {activeTab === 'overview' && (

@@ -112,14 +112,12 @@ export default function CreatorWorkspace() {
         <div className="p-6 border-b border-slate-700/50">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-lg">
-                {creator?.displayName?.charAt(0) || 'C'}
-              </span>
+              <span className="text-white font-bold text-lg">R</span>
             </div>
             {!sidebarCollapsed && (
               <div>
-                <h2 className="neo-heading-4 text-white">{creator?.displayName}</h2>
-                <p className="neo-text-small text-slate-400">@{creator?.username}</p>
+                <h2 className="neo-heading-4 text-white">Revelio</h2>
+                <p className="neo-text-small text-slate-400">Creator Platform</p>
               </div>
             )}
           </div>
@@ -221,32 +219,6 @@ export default function CreatorWorkspace() {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
-        {/* Top App Bar */}
-        <header className="bg-slate-800/30 backdrop-blur-xl border-b border-slate-700/50 p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <h1 className="neo-heading-3 text-white">
-                {sidebarItems.find(item => item.id === activeTab)?.label || 'Workspace'}
-              </h1>
-              <NeoBadge variant="success">
-                {creator?.isVerified ? 'Verified' : 'Unverified'}
-              </NeoBadge>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-bold">JD</span>
-                </div>
-                <span className="neo-text-body text-slate-300">{creator?.displayName}</span>
-              </div>
-              <NeoButton variant="ghost" size="sm">
-                Settings
-              </NeoButton>
-            </div>
-          </div>
-        </header>
-
         {/* Content Area */}
         <main className="flex-1 p-6 overflow-auto">
           {activeTab === 'overview' && (
