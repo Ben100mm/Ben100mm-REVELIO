@@ -241,11 +241,11 @@ export default function CampaignManager() {
 
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'sponsored': return '💰';
+      case 'sponsored': return '$';
       case 'affiliate': return '🔗';
       case 'partnership': return '🤝';
       case 'collaboration': return '🎨';
-      default: return '💰';
+      default: return '$';
     }
   };
 

@@ -308,9 +308,9 @@ export default function BrandSetupWizard() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               {[
-                { id: 'card', label: 'Credit Card', icon: '💳' },
-                { id: 'bank', label: 'Bank Transfer', icon: '🏦' },
-                { id: 'paypal', label: 'PayPal', icon: '💰' }
+                { id: 'card', label: 'Credit Card', icon: 'Card' },
+                { id: 'bank', label: 'Bank Transfer', icon: 'Bank' },
+                { id: 'paypal', label: 'PayPal', icon: 'PayPal' }
               ].map((method) => (
                 <button
                   key={method.id}

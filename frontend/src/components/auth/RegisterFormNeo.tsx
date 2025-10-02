@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { 
   NeoCard, 
   NeoButton, 
@@ -23,6 +23,15 @@ export default function RegisterFormNeo() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Set user type based on URL parameter
+  useEffect(() => {
+    const type = searchParams.get('type');
+    if (type === 'creator' || type === 'brand') {
+      setFormData(prev => ({ ...prev, userType: type }));
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,7 +68,7 @@ export default function RegisterFormNeo() {
       if (formData.userType === 'brand') {
         router.push('/brand/setup');
       } else {
-        router.push('/creator/dashboard');
+        router.push('/creator/setup');
       }
     } catch (err) {
       setError('Registration failed. Please try again.');

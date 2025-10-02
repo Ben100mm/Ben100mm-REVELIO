@@ -208,11 +208,11 @@ export default function CampaignManagement() {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'ACTIVE': return '▶️';
+      case 'ACTIVE': return '▶';
       case 'DRAFT': return '📝';
-      case 'PAUSED': return '⏸️';
-      case 'COMPLETED': return '✅';
-      case 'CANCELLED': return '❌';
+      case 'PAUSED': return '⏸';
+      case 'COMPLETED': return '✓';
+      case 'CANCELLED': return '✗';
       default: return '📄';
     }
   };

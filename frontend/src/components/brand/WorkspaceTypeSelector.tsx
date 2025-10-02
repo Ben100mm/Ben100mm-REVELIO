@@ -37,7 +37,7 @@ export default function WorkspaceTypeSelector() {
         'Advanced analytics dashboard',
         'Team collaboration tools'
       ],
-      icon: '🏢',
+      icon: 'Brand',
       color: 'from-purple-500 to-pink-600',
       recommended: true
     },
@@ -53,7 +53,7 @@ export default function WorkspaceTypeSelector() {
         'Custom branding options',
         'API access for integrations'
       ],
-      icon: '🎯',
+      icon: 'Agency',
       color: 'from-blue-500 to-cyan-600',
       recommended: false
     },
@@ -69,7 +69,7 @@ export default function WorkspaceTypeSelector() {
         'Priority support',
         'SLA guarantees'
       ],
-      icon: '🏛️',
+      icon: 'Enterprise',
       color: 'from-green-500 to-emerald-600',
       recommended: false
     }

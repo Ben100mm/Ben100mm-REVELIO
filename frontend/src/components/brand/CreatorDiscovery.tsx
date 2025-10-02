@@ -314,10 +314,10 @@ export default function CreatorDiscovery() {
 
   const getAvailabilityIcon = (availability: string) => {
     switch (availability) {
-      case 'AVAILABLE': return '🟢';
-      case 'BUSY': return '🟡';
-      case 'UNAVAILABLE': return '🔴';
-      default: return '⚪';
+      case 'AVAILABLE': return '●';
+      case 'BUSY': return '●';
+      case 'UNAVAILABLE': return '●';
+      default: return '○';
     }
   };
 

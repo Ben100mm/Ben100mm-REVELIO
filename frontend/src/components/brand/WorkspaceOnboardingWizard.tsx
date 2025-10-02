@@ -157,7 +157,7 @@ export default function WorkspaceOnboardingWizard() {
                 {formData.companyLogo ? (
                   <img src={formData.companyLogo} alt="Company Logo" className="w-full h-full object-cover rounded-2xl" />
                 ) : (
-                  <span className="text-4xl">🏢</span>
+                  <span className="text-2xl font-bold text-white">Brand</span>
                 )}
               </div>
               <NeoButton variant="ghost" size="sm">

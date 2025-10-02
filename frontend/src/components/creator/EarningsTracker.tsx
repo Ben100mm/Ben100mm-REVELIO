@@ -143,10 +143,10 @@ export default function EarningsTracker() {
 
   const getTransactionIcon = (type: string) => {
     switch (type) {
-      case 'payment': return '💰';
+      case 'payment': return '$';
       case 'bonus': return '🎁';
-      case 'refund': return '↩️';
-      default: return '💰';
+      case 'refund': return '↩';
+      default: return '$';
     }
   };
 

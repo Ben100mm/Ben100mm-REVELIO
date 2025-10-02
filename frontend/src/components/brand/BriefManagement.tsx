@@ -163,11 +163,11 @@ export default function BriefManagement() {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'ACTIVE': return '▶️';
+      case 'ACTIVE': return '▶';
       case 'PUBLISHED': return '📢';
       case 'DRAFT': return '📝';
-      case 'COMPLETED': return '✅';
-      case 'CANCELLED': return '❌';
+      case 'COMPLETED': return '✓';
+      case 'CANCELLED': return '✗';
       default: return '📄';
     }
   };

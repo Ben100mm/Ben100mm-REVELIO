@@ -372,12 +372,12 @@ export default function ContractManagement() {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'SIGNED': return '✅';
-      case 'ACTIVE': return '🟢';
+      case 'SIGNED': return '✓';
+      case 'ACTIVE': return '●';
       case 'PENDING_SIGNATURE': return '⏳';
       case 'DRAFT': return '📝';
       case 'COMPLETED': return '🏁';
-      case 'TERMINATED': return '❌';
+      case 'TERMINATED': return '✗';
       case 'EXPIRED': return '⏰';
       default: return '📄';
     }

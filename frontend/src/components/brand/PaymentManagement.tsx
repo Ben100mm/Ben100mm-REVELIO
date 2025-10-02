@@ -267,14 +267,14 @@ export default function PaymentManagement() {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'COMPLETED': return '✅';
+      case 'COMPLETED': return '✓';
       case 'PENDING': return '⏳';
-      case 'PROCESSING': return '🔄';
-      case 'FAILED': return '❌';
-      case 'CANCELLED': return '🚫';
-      case 'ACTIVE': return '🟢';
-      case 'EXCEEDED': return '🔴';
-      case 'PAUSED': return '⏸️';
+      case 'PROCESSING': return '⟲';
+      case 'FAILED': return '✗';
+      case 'CANCELLED': return '✗';
+      case 'ACTIVE': return '●';
+      case 'EXCEEDED': return '●';
+      case 'PAUSED': return '⏸';
       default: return '📄';
     }
   };

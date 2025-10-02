@@ -184,14 +184,14 @@ export default function EarningsDashboard() {
 
   const getEarningsTypeIcon = (type: string) => {
     const icons = {
-      'CPM': '👁️',
-      'CPC': '🖱️',
-      'CPV': '▶️',
+      'CPM': '👁',
+      'CPC': '🖱',
+      'CPV': '▶',
       'REVENUE_SHARE': '📈',
       'BONUS': '🎁',
-      'COMMISSION': '💰'
+      'COMMISSION': '$'
     };
-    return icons[type as keyof typeof icons] || '💵';
+    return icons[type as keyof typeof icons] || '$';
   };
 
   const getEarningsTypeColor = (type: string) => {
@@ -377,7 +377,7 @@ export default function EarningsDashboard() {
                 <div key={index} className="flex items-center justify-between p-3 bg-slate-800/30 rounded-xl">
                   <div className="flex items-center space-x-3">
                     <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                      <span className="text-white text-xs">💰</span>
+                      <span className="text-white text-xs">$</span>
                     </div>
                     <div>
                       <p className="neo-text-small text-white">

@@ -81,11 +81,13 @@ export default function CreatorWorkspace() {
 
   const sidebarItems = [
     { id: 'overview', label: 'Overview', icon: 'dashboard', description: 'Dashboard overview with earnings and activity' },
-    { id: 'content', label: 'Content Hub', icon: 'content', description: 'Create and manage content' },
+    { id: 'opportunities', label: 'Opportunities', icon: 'opportunities', description: 'Browse briefs and apply to campaigns' },
+    { id: 'content', label: 'Independent Content', icon: 'content', description: 'Create and manage your own content' },
+    { id: 'analytics', label: 'Analytics', icon: 'analytics', description: 'Performance insights and metrics' },
+    { id: 'earnings', label: 'Earnings', icon: 'earnings', description: 'Track your income and payouts' },
+    { id: 'payouts', label: 'Payouts', icon: 'payouts', description: 'Manage your payment methods' },
     { id: 'messages', label: 'Messages', icon: 'messages', description: '3 panels: Message lists, Conversation window, person details' },
-    { id: 'analytics', label: 'Analytics', icon: 'analytics', description: 'Performance insights' },
-    { id: 'earnings', label: 'Earnings', icon: 'earnings', description: 'Track your income' },
-    { id: 'campaigns', label: 'Campaigns', icon: 'campaigns', description: 'Manage partnerships' },
+    { id: 'campaigns', label: 'Campaigns', icon: 'campaigns', description: 'Manage active partnerships' },
     { id: 'audience', label: 'Audience', icon: 'audience', description: 'Follower insights' },
     { id: 'collaborations', label: 'Collaborations', icon: 'collaborations', description: 'Brand partnerships' },
     { id: 'settings', label: 'Settings', icon: 'settings', description: 'Account settings' }
@@ -141,6 +143,11 @@ export default function CreatorWorkspace() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                   </svg>
                 )}
+                {item.icon === 'opportunities' && (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6" />
+                  </svg>
+                )}
                 {item.icon === 'content' && (
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -154,6 +161,11 @@ export default function CreatorWorkspace() {
                 {item.icon === 'earnings' && (
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                  </svg>
+                )}
+                {item.icon === 'payouts' && (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                   </svg>
                 )}
                 {item.icon === 'campaigns' && (
@@ -368,6 +380,92 @@ export default function CreatorWorkspace() {
             </div>
           )}
 
+          {activeTab === 'opportunities' && (
+            <div className="space-y-6">
+              <h2 className="neo-heading-2 neo-text-glow">Opportunities</h2>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Available Briefs */}
+                <NeoCard variant="glass" className="p-6">
+                  <h3 className="neo-heading-4 text-white mb-4">Available Briefs</h3>
+                  <div className="space-y-4">
+                    <div className="p-4 neo-glass rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="neo-text-body text-white font-medium">Tech Review Campaign</h4>
+                        <NeoBadge variant="success" size="sm">$5,000</NeoBadge>
+                      </div>
+                      <p className="neo-text-small text-slate-400 mb-2">TechCorp Solutions</p>
+                      <p className="neo-text-small text-slate-300">Review the latest iPhone 15 Pro features and performance</p>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="neo-text-small text-slate-400">Deadline: 7 days</span>
+                        <NeoButton variant="primary" size="sm">Apply</NeoButton>
+                      </div>
+                    </div>
+                    
+                    <div className="p-4 neo-glass rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="neo-text-body text-white font-medium">Lifestyle Partnership</h4>
+                        <NeoBadge variant="warning" size="sm">$3,500</NeoBadge>
+                      </div>
+                      <p className="neo-text-small text-slate-400 mb-2">LifestyleBrand</p>
+                      <p className="neo-text-small text-slate-300">Create content showcasing sustainable living products</p>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="neo-text-small text-slate-400">Deadline: 14 days</span>
+                        <NeoButton variant="primary" size="sm">Apply</NeoButton>
+                      </div>
+                    </div>
+                  </div>
+                </NeoCard>
+
+                {/* My Applications */}
+                <NeoCard variant="glass" className="p-6">
+                  <h3 className="neo-heading-4 text-white mb-4">My Applications</h3>
+                  <div className="space-y-4">
+                    <div className="p-4 neo-glass rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="neo-text-body text-white font-medium">Fitness App Review</h4>
+                        <NeoBadge variant="info" size="sm">Pending</NeoBadge>
+                      </div>
+                      <p className="neo-text-small text-slate-400 mb-2">FitTech Inc.</p>
+                      <p className="neo-text-small text-slate-300">Applied 2 days ago</p>
+                    </div>
+                    
+                    <div className="p-4 neo-glass rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="neo-text-body text-white font-medium">Gaming Setup Tour</h4>
+                        <NeoBadge variant="success" size="sm">Accepted</NeoBadge>
+                      </div>
+                      <p className="neo-text-small text-slate-400 mb-2">GameGear Co.</p>
+                      <p className="neo-text-small text-slate-300">Contract signed, starting next week</p>
+                    </div>
+                  </div>
+                </NeoCard>
+
+                {/* Quick Stats */}
+                <NeoCard variant="glass" className="p-6">
+                  <h3 className="neo-heading-4 text-white mb-4">Quick Stats</h3>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <span className="neo-text-small text-slate-300">Applications Sent</span>
+                      <span className="neo-text-body text-white font-medium">12</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="neo-text-small text-slate-300">Acceptance Rate</span>
+                      <span className="neo-text-body text-green-400 font-medium">75%</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="neo-text-small text-slate-300">Avg. Response Time</span>
+                      <span className="neo-text-body text-white font-medium">2.3 days</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="neo-text-small text-slate-300">Total Earned</span>
+                      <span className="neo-text-body text-green-400 font-medium">$8,500</span>
+                    </div>
+                  </div>
+                </NeoCard>
+              </div>
+            </div>
+          )}
+
           {activeTab === 'content' && <ContentCreationHub />}
           {activeTab === 'messages' && (
             <div className="space-y-6">
@@ -534,6 +632,141 @@ export default function CreatorWorkspace() {
           )}
           {activeTab === 'analytics' && <PerformanceAnalytics />}
           {activeTab === 'earnings' && <EarningsTracker />}
+          
+          {activeTab === 'payouts' && (
+            <div className="space-y-6">
+              <h2 className="neo-heading-2 neo-text-glow">Payouts</h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Payout Methods */}
+                <NeoCard variant="glass" className="p-6">
+                  <h3 className="neo-heading-4 text-white mb-4">Payout Methods</h3>
+                  <div className="space-y-4">
+                    <div className="p-4 neo-glass rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                            <span className="text-white text-sm font-bold">🏦</span>
+                          </div>
+                          <div>
+                            <h4 className="neo-text-body text-white font-medium">Bank Transfer</h4>
+                            <p className="neo-text-small text-slate-400">****1234</p>
+                          </div>
+                        </div>
+                        <NeoBadge variant="success" size="sm">Primary</NeoBadge>
+                      </div>
+                      <p className="neo-text-small text-slate-300">Next payout: $2,500 on Dec 15</p>
+                    </div>
+                    
+                    <div className="p-4 neo-glass rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                            <span className="text-white text-sm font-bold">💳</span>
+                          </div>
+                          <div>
+                            <h4 className="neo-text-body text-white font-medium">PayPal</h4>
+                            <p className="neo-text-small text-slate-400">john.doe@email.com</p>
+                          </div>
+                        </div>
+                        <NeoBadge variant="info" size="sm">Backup</NeoBadge>
+                      </div>
+                      <p className="neo-text-small text-slate-300">Available for instant transfers</p>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-6">
+                    <NeoButton variant="primary" className="w-full">
+                      Add Payment Method
+                    </NeoButton>
+                  </div>
+                </NeoCard>
+
+                {/* Payout History */}
+                <NeoCard variant="glass" className="p-6">
+                  <h3 className="neo-heading-4 text-white mb-4">Recent Payouts</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between p-3 neo-glass rounded-lg">
+                      <div>
+                        <h4 className="neo-text-body text-white font-medium">November Payout</h4>
+                        <p className="neo-text-small text-slate-400">Nov 15, 2024</p>
+                      </div>
+                      <div className="text-right">
+                        <span className="neo-text-body text-green-400 font-medium">$2,500</span>
+                        <p className="neo-text-small text-slate-400">Bank Transfer</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center justify-between p-3 neo-glass rounded-lg">
+                      <div>
+                        <h4 className="neo-text-body text-white font-medium">October Payout</h4>
+                        <p className="neo-text-small text-slate-400">Oct 15, 2024</p>
+                      </div>
+                      <div className="text-right">
+                        <span className="neo-text-body text-green-400 font-medium">$1,800</span>
+                        <p className="neo-text-small text-slate-400">Bank Transfer</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center justify-between p-3 neo-glass rounded-lg">
+                      <div>
+                        <h4 className="neo-text-body text-white font-medium">September Payout</h4>
+                        <p className="neo-text-small text-slate-400">Sep 15, 2024</p>
+                      </div>
+                      <div className="text-right">
+                        <span className="neo-text-body text-green-400 font-medium">$3,200</span>
+                        <p className="neo-text-small text-slate-400">PayPal</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-6">
+                    <NeoButton variant="ghost" className="w-full">
+                      View All Payouts
+                    </NeoButton>
+                  </div>
+                </NeoCard>
+              </div>
+
+              {/* Payout Settings */}
+              <NeoCard variant="glass" className="p-6">
+                <h3 className="neo-heading-4 text-white mb-4">Payout Settings</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div>
+                    <label className="neo-form-label mb-2 block">Payout Frequency</label>
+                    <select className="w-full bg-slate-800/50 border border-slate-600 rounded-xl p-3 text-white focus:outline-none focus:border-blue-500">
+                      <option value="weekly">Weekly</option>
+                      <option value="bi-weekly" selected>Bi-weekly</option>
+                      <option value="monthly">Monthly</option>
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label className="neo-form-label mb-2 block">Minimum Payout</label>
+                    <input
+                      type="number"
+                      placeholder="100"
+                      className="w-full bg-slate-800/50 border border-slate-600 rounded-xl p-3 text-white placeholder-slate-400 focus:outline-none focus:border-blue-500"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="neo-form-label mb-2 block">Tax Settings</label>
+                    <select className="w-full bg-slate-800/50 border border-slate-600 rounded-xl p-3 text-white focus:outline-none focus:border-blue-500">
+                      <option value="individual">Individual</option>
+                      <option value="business">Business</option>
+                      <option value="contractor">Contractor</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div className="mt-6">
+                  <NeoButton variant="primary">
+                    Save Settings
+                  </NeoButton>
+                </div>
+              </NeoCard>
+            </div>
+          )}
           {activeTab === 'campaigns' && <CampaignManager />}
           
           {activeTab === 'audience' && (
