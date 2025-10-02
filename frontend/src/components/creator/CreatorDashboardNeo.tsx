@@ -12,6 +12,8 @@ import {
 } from '@/components/neo-materialism';
 import ContentTypeSelector from './ContentTypeSelector';
 import ContentCreationWizard from './ContentCreationWizard';
+import PerformanceTracking from './PerformanceTracking';
+import EarningsDashboard from './EarningsDashboard';
 
 interface Creator {
   id: string;
@@ -231,6 +233,8 @@ export default function CreatorDashboardNeo() {
                 { id: 'overview', label: 'Overview' },
                 { id: 'content', label: 'Content' },
                 { id: 'analytics', label: 'Analytics' },
+                { id: 'performance', label: 'Performance' },
+                { id: 'earnings', label: 'Earnings' },
                 { id: 'campaigns', label: 'Campaigns' }
               ].map((tab) => (
                 <NeoButton
@@ -393,6 +397,18 @@ export default function CreatorDashboardNeo() {
                 </div>
               </NeoCard>
             </div>
+          </section>
+        )}
+
+        {activeTab === 'performance' && (
+          <section>
+            <PerformanceTracking />
+          </section>
+        )}
+
+        {activeTab === 'earnings' && (
+          <section>
+            <EarningsDashboard />
           </section>
         )}
 
