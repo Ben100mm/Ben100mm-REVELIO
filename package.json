@@ -1,0 +1,35 @@
+{
+  "name": "revelio",
+  "version": "1.0.0",
+  "description": "Creator-powered marketplace and distribution engine where every creator gets paid for impact",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": [
+    "marketplace",
+    "creators",
+    "payments",
+    "distribution",
+    "impact"
+  ],
+  "author": "Revelio Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.22",
+    "supertest": "^6.3.3"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
