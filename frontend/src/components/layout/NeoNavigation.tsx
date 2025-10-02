@@ -24,7 +24,7 @@ export default function NeoNavigation() {
   const isActive = (href: string) => pathname === href;
 
   return (
-    <nav className="neo-nav-primary sticky top-0 z-50">
+    <nav className="sticky top-0 z-50 neo-glass rounded-2xl relative">
       <div className="flex items-center h-16">
         {/* Logo - Extreme Left */}
         <Link href="/" className="flex items-center space-x-3 flex-shrink-0 pl-4 sm:pl-6 lg:pl-8">
@@ -51,23 +51,9 @@ export default function NeoNavigation() {
           ))}
         </div>
 
-        {/* Desktop Actions - Extreme Right */}
-        <div className="hidden md:flex items-center space-x-4 flex-shrink-0 mr-0">
-          <Link href="/auth/login">
-            <NeoButton variant="ghost" size="sm">
-              Sign In
-            </NeoButton>
-          </Link>
-          <Link href="/auth/register">
-            <NeoButton variant="primary" size="sm" glow>
-              Get Started
-            </NeoButton>
-          </Link>
-        </div>
-
         {/* Mobile Menu Button - Extreme Right */}
         <button
-          className="md:hidden p-2 text-slate-300 hover:text-white transition-colors duration-200 flex-shrink-0 ml-auto mr-0"
+          className="md:hidden p-2 text-slate-300 hover:text-white transition-colors duration-200 flex-shrink-0 ml-auto"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle mobile menu"
         >
@@ -79,6 +65,20 @@ export default function NeoNavigation() {
             )}
           </svg>
         </button>
+      </div>
+
+      {/* Desktop Actions - Absolute Positioned at Extreme Right */}
+      <div className="hidden md:flex items-center space-x-4 absolute top-1/2 right-0 transform -translate-y-1/2 pr-4 sm:pr-6 lg:pr-8">
+        <Link href="/auth/login">
+          <NeoButton variant="ghost" size="sm">
+            Sign In
+          </NeoButton>
+        </Link>
+        <Link href="/auth/register">
+          <NeoButton variant="primary" size="sm" glow>
+            Get Started
+          </NeoButton>
+        </Link>
       </div>
 
       {/* Mobile Menu */}
