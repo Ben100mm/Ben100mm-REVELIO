@@ -82,17 +82,17 @@ export default function BrandWorkspace() {
   }, []);
 
   const sidebarItems = [
-    { id: 'overview', label: 'Overview', icon: 'dashboard', description: 'Dashboard overview with stats and quick actions' },
-    { id: 'briefs', label: 'Briefs', icon: 'briefs', description: 'Create and manage content briefs' },
-    { id: 'campaigns', label: 'Campaigns', icon: 'campaigns', description: 'Create and manage marketing campaigns' },
-    { id: 'creators', label: 'Creator Discovery', icon: 'people', description: 'Find and connect with creators' },
-    { id: 'creator-selection', label: 'Creator Selection', icon: 'selection', description: 'AI matching & manual selection' },
-    { id: 'payments', label: 'Payments', icon: 'payments', description: 'Manage payments and budgets' },
-    { id: 'analytics', label: 'Analytics', icon: 'analytics', description: 'Real-time performance tracking' },
-    { id: 'approval', label: 'Content Approval', icon: 'approval', description: 'Review and feedback system' },
-    { id: 'contracts', label: 'Contracts', icon: 'contracts', description: 'Contract management' },
-    { id: 'messages', label: 'Messages', icon: 'messages', description: '3 panels: Message lists, Conversation window, person details' },
-    { id: 'settings', label: 'Settings', icon: 'settings', description: 'Workspace settings' }
+    { id: 'overview', label: 'Overview', icon: 'dashboard' },
+    { id: 'briefs', label: 'Briefs', icon: 'briefs' },
+    { id: 'campaigns', label: 'Campaigns', icon: 'campaigns' },
+    { id: 'creators', label: 'Creator Discovery', icon: 'people' },
+    { id: 'creator-selection', label: 'Creator Selection', icon: 'selection' },
+    { id: 'payments', label: 'Payments', icon: 'payments' },
+    { id: 'analytics', label: 'Analytics', icon: 'analytics' },
+    { id: 'approval', label: 'Content Approval', icon: 'approval' },
+    { id: 'contracts', label: 'Contracts', icon: 'contracts' },
+    { id: 'messages', label: 'Messages', icon: 'messages' },
+    { id: 'settings', label: 'Settings', icon: 'settings' }
   ];
 
   if (loading) {
@@ -126,7 +126,7 @@ export default function BrandWorkspace() {
         </div>
 
         {/* Sidebar Navigation */}
-        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+        <nav className="flex-1 p-4 space-y-2">
           {sidebarItems.map((item) => (
             <button
               key={item.id}
@@ -198,7 +198,6 @@ export default function BrandWorkspace() {
               {!sidebarCollapsed && (
                 <div className="flex-1 text-left">
                   <div className="neo-text-body font-medium">{item.label}</div>
-                  <div className="neo-text-small text-slate-400">{item.description}</div>
                 </div>
               )}
             </button>

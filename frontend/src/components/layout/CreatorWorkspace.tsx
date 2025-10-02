@@ -80,17 +80,17 @@ export default function CreatorWorkspace() {
   }, []);
 
   const sidebarItems = [
-    { id: 'overview', label: 'Overview', icon: 'dashboard', description: 'Dashboard overview with earnings and activity' },
-    { id: 'opportunities', label: 'Opportunities', icon: 'opportunities', description: 'Browse briefs and apply to campaigns' },
-    { id: 'content', label: 'Independent Content', icon: 'content', description: 'Create and manage your own content' },
-    { id: 'analytics', label: 'Analytics', icon: 'analytics', description: 'Performance insights and metrics' },
-    { id: 'earnings', label: 'Earnings', icon: 'earnings', description: 'Track your income and payouts' },
-    { id: 'payouts', label: 'Payouts', icon: 'payouts', description: 'Manage your payment methods' },
-    { id: 'messages', label: 'Messages', icon: 'messages', description: '3 panels: Message lists, Conversation window, person details' },
-    { id: 'campaigns', label: 'Campaigns', icon: 'campaigns', description: 'Manage active partnerships' },
-    { id: 'audience', label: 'Audience', icon: 'audience', description: 'Follower insights' },
-    { id: 'collaborations', label: 'Collaborations', icon: 'collaborations', description: 'Brand partnerships' },
-    { id: 'settings', label: 'Settings', icon: 'settings', description: 'Account settings' }
+    { id: 'overview', label: 'Overview', icon: 'dashboard' },
+    { id: 'opportunities', label: 'Opportunities', icon: 'opportunities' },
+    { id: 'content', label: 'Independent Content', icon: 'content' },
+    { id: 'analytics', label: 'Analytics', icon: 'analytics' },
+    { id: 'earnings', label: 'Earnings', icon: 'earnings' },
+    { id: 'payouts', label: 'Payouts', icon: 'payouts' },
+    { id: 'messages', label: 'Messages', icon: 'messages' },
+    { id: 'campaigns', label: 'Campaigns', icon: 'campaigns' },
+    { id: 'audience', label: 'Audience', icon: 'audience' },
+    { id: 'collaborations', label: 'Collaborations', icon: 'collaborations' },
+    { id: 'settings', label: 'Settings', icon: 'settings' }
   ];
 
   if (loading) {
@@ -124,7 +124,7 @@ export default function CreatorWorkspace() {
         </div>
 
         {/* Sidebar Navigation */}
-        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+        <nav className="flex-1 p-4 space-y-2">
           {sidebarItems.map((item) => (
             <button
               key={item.id}
@@ -196,7 +196,6 @@ export default function CreatorWorkspace() {
               {!sidebarCollapsed && (
                 <div className="flex-1 text-left">
                   <div className="neo-text-body font-medium">{item.label}</div>
-                  <div className="neo-text-small text-slate-400">{item.description}</div>
                 </div>
               )}
             </button>
