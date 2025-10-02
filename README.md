@@ -6,7 +6,7 @@
 
 "We are building a creator-powered marketplace where writers, artists, and storytellers get paid for impact — blending authentic research with brand partnerships, distributed natively across social platforms."
 
-## One-Paragraph Pitch
+## Brief
 
 Our platform is a unified content marketplace that connects creators — including writers, video makers, and thought leaders — with audiences and brands. Creators produce both independent and branded content, seamlessly mixing authentic insights with sponsored campaigns. They are paid based on performance metrics like views, clicks, impressions, and traffic driven, ensuring incentives are aligned with quality and engagement. For brands, it's an efficient way to access expert-led, trust-based distribution across multiple formats and social channels. For creators, it's a fair monetization system that rewards impact, not just reach. For audiences, it delivers content that is both useful and trustworthy — not just ads.
 
