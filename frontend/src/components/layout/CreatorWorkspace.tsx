@@ -380,7 +380,6 @@ export default function CreatorWorkspace() {
 
           {activeTab === 'opportunities' && (
             <div className="space-y-6">
-              <h2 className="neo-heading-2 neo-text-glow">Opportunities</h2>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Available Briefs */}
                 <NeoCard variant="glass" className="p-6">
@@ -467,7 +466,6 @@ export default function CreatorWorkspace() {
           {activeTab === 'content' && <ContentCreationHub />}
           {activeTab === 'messages' && (
             <div className="space-y-6">
-              <h2 className="neo-heading-2 neo-text-glow">Messages</h2>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[600px]">
                 {/* Message Lists Panel */}
                 <NeoCard variant="glass" className="p-4">
@@ -633,7 +631,6 @@ export default function CreatorWorkspace() {
           
           {activeTab === 'payouts' && (
             <div className="space-y-6">
-              <h2 className="neo-heading-2 neo-text-glow">Payouts</h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Payout Methods */}
                 <NeoCard variant="glass" className="p-6">
@@ -769,7 +766,6 @@ export default function CreatorWorkspace() {
           
           {activeTab === 'audience' && (
             <div className="space-y-6">
-              <h2 className="neo-heading-2 neo-text-glow">Audience Insights</h2>
               <NeoCard variant="glass" className="p-6">
                 <p className="neo-text-body text-slate-300">Audience insights interface coming soon...</p>
               </NeoCard>
@@ -778,7 +774,6 @@ export default function CreatorWorkspace() {
           
           {activeTab === 'collaborations' && (
             <div className="space-y-6">
-              <h2 className="neo-heading-2 neo-text-glow">Brand Collaborations</h2>
               <NeoCard variant="glass" className="p-6">
                 <p className="neo-text-body text-slate-300">Collaborations interface coming soon...</p>
               </NeoCard>
@@ -787,7 +782,6 @@ export default function CreatorWorkspace() {
           
           {activeTab === 'settings' && (
             <div className="space-y-6">
-              <h2 className="neo-heading-2 neo-text-glow">Account Settings</h2>
               <NeoCard variant="glass" className="p-6">
                 <p className="neo-text-body text-slate-300">Settings interface coming soon...</p>
               </NeoCard>

@@ -392,7 +392,6 @@ export default function BrandWorkspace() {
           {activeTab === 'approval' && <ContentApprovalWorkflow />}
           {activeTab === 'messages' && (
             <div className="space-y-6">
-              <h2 className="neo-heading-2 neo-text-glow">Messages</h2>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[600px]">
                 {/* Message Lists Panel */}
                 <NeoCard variant="glass" className="p-4">
@@ -550,7 +549,6 @@ export default function BrandWorkspace() {
           
           {activeTab === 'settings' && (
             <div className="space-y-6">
-              <h2 className="neo-heading-2 neo-text-glow">Brand Settings</h2>
               <NeoCard variant="glass" className="p-6">
                 <p className="neo-text-body text-slate-300">Settings interface coming soon...</p>
               </NeoCard>
