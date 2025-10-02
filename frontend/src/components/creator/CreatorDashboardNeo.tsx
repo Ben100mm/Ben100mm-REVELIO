@@ -10,6 +10,8 @@ import {
   NeoInput,
   NeoModal
 } from '@/components/neo-materialism';
+import ContentTypeSelector from './ContentTypeSelector';
+import ContentCreationWizard from './ContentCreationWizard';
 
 interface Creator {
   id: string;
@@ -55,7 +57,9 @@ export default function CreatorDashboardNeo() {
   const [analytics, setAnalytics] = useState<Analytics | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isContentTypeModalOpen, setIsContentTypeModalOpen] = useState(false);
+  const [isCreationWizardOpen, setIsCreationWizardOpen] = useState(false);
+  const [selectedContentType, setSelectedContentType] = useState<'independent' | 'sponsored' | null>(null);
 
   useEffect(() => {
     // Simulate API calls
@@ -135,6 +139,16 @@ export default function CreatorDashboardNeo() {
     fetchData();
   }, []);
 
+  const handleContentTypeSelect = (type: 'independent' | 'sponsored') => {
+    setSelectedContentType(type);
+    setIsCreationWizardOpen(true);
+  };
+
+  const handleContentCreated = (newContent: any) => {
+    setContent(prev => [newContent, ...prev]);
+    setSelectedContentType(null);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
@@ -169,7 +183,7 @@ export default function CreatorDashboardNeo() {
               <NeoButton variant="ghost" size="sm">
                 Settings
               </NeoButton>
-              <NeoButton variant="primary" size="sm" onClick={() => setIsModalOpen(true)}>
+              <NeoButton variant="primary" size="sm" onClick={() => setIsContentTypeModalOpen(true)}>
                 Create Content
               </NeoButton>
             </div>
@@ -288,7 +302,7 @@ export default function CreatorDashboardNeo() {
           <section>
             <div className="flex justify-between items-center mb-6">
               <h3 className="neo-heading-3 text-white">Your Content</h3>
-              <NeoButton variant="primary" onClick={() => setIsModalOpen(true)}>
+              <NeoButton variant="primary" onClick={() => setIsContentTypeModalOpen(true)}>
                 Create New
               </NeoButton>
             </div>
@@ -419,37 +433,25 @@ export default function CreatorDashboardNeo() {
         )}
       </div>
 
-      {/* Create Content Modal */}
-      <NeoModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        title="Create New Content"
-        variant="glass"
-        size="lg"
-      >
-        <div className="neo-form-layout">
-          <NeoInput
-            label="Content Title"
-            placeholder="Enter your content title"
-            variant="glass"
-          />
-          
-          <NeoInput
-            label="Content Type"
-            placeholder="Select content type"
-            variant="glass"
-          />
-          
-          <div className="neo-form-actions">
-            <NeoButton variant="ghost" onClick={() => setIsModalOpen(false)}>
-              Cancel
-            </NeoButton>
-            <NeoButton variant="primary">
-              Create Content
-            </NeoButton>
-          </div>
-        </div>
-      </NeoModal>
+      {/* Content Type Selection Modal */}
+      <ContentTypeSelector
+        isOpen={isContentTypeModalOpen}
+        onClose={() => setIsContentTypeModalOpen(false)}
+        onSelectContentType={handleContentTypeSelect}
+      />
+
+      {/* Content Creation Wizard */}
+      {selectedContentType && (
+        <ContentCreationWizard
+          isOpen={isCreationWizardOpen}
+          onClose={() => {
+            setIsCreationWizardOpen(false);
+            setSelectedContentType(null);
+          }}
+          contentType={selectedContentType}
+          onContentCreated={handleContentCreated}
+        />
+      )}
     </div>
   );
 }
