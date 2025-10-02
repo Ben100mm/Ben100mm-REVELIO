@@ -1,5 +1,5 @@
-import BrandDashboardNeo from '@/components/brand/BrandDashboardNeo';
+import BusinessWorkspace from '@/components/layout/BusinessWorkspace';
 
 export default function BrandDashboardPage() {
-  return <BrandDashboardNeo />;
+  return <BusinessWorkspace />;
 }

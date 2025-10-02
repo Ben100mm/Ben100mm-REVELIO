@@ -29,14 +29,41 @@ interface Brief {
   createdAt: string;
 }
 
+interface Creator {
+  id: string;
+  name: string;
+  bio: string;
+  avatar: string;
+  specialties: string[];
+  platforms: string[];
+  followerCount: number;
+  engagementRate: number;
+  hourlyRate: number;
+  rating: number;
+  isVerified: boolean;
+  location: string;
+  languages: string[];
+  portfolio: {
+    title: string;
+    type: string;
+    views: number;
+    engagement: number;
+  }[];
+}
+
 export default function MarketplaceNeo() {
+  const [marketplaceType, setMarketplaceType] = useState<'creator' | 'business'>('creator');
   const [briefs, setBriefs] = useState<Brief[]>([]);
+  const [creators, setCreators] = useState<Creator[]>([]);
   const [filteredBriefs, setFilteredBriefs] = useState<Brief[]>([]);
+  const [filteredCreators, setFilteredCreators] = useState<Creator[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedBrief, setSelectedBrief] = useState<Brief | null>(null);
+  const [selectedCreator, setSelectedCreator] = useState<Creator | null>(null);
   const [showApplicationModal, setShowApplicationModal] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
   const [applicationData, setApplicationData] = useState({
     proposal: '',
     budget: '',
@@ -103,35 +130,122 @@ export default function MarketplaceNeo() {
       }
     ];
 
+    const mockCreators: Creator[] = [
+      {
+        id: '1',
+        name: 'Sarah Chen',
+        bio: 'Tech content creator specializing in AI and machine learning. 5+ years experience creating educational content.',
+        avatar: '/api/placeholder/100/100',
+        specialties: ['AI', 'Machine Learning', 'Tech Reviews', 'Tutorials'],
+        platforms: ['YouTube', 'LinkedIn', 'Medium', 'Twitter'],
+        followerCount: 125000,
+        engagementRate: 8.5,
+        hourlyRate: 150,
+        rating: 4.9,
+        isVerified: true,
+        location: 'San Francisco, CA',
+        languages: ['English', 'Mandarin'],
+        portfolio: [
+          { title: 'AI for Beginners', type: 'Video', views: 250000, engagement: 12.5 },
+          { title: 'Machine Learning Explained', type: 'Article', views: 180000, engagement: 9.2 }
+        ]
+      },
+      {
+        id: '2',
+        name: 'Marcus Johnson',
+        bio: 'Marketing strategist and content creator focused on B2B SaaS. Expert in LinkedIn and Twitter marketing.',
+        avatar: '/api/placeholder/100/100',
+        specialties: ['B2B Marketing', 'SaaS', 'LinkedIn', 'Content Strategy'],
+        platforms: ['LinkedIn', 'Twitter', 'Medium'],
+        followerCount: 85000,
+        engagementRate: 6.8,
+        hourlyRate: 120,
+        rating: 4.7,
+        isVerified: true,
+        location: 'Austin, TX',
+        languages: ['English'],
+        portfolio: [
+          { title: 'SaaS Growth Hacks', type: 'Article', views: 150000, engagement: 7.8 },
+          { title: 'LinkedIn Marketing Tips', type: 'Video', views: 200000, engagement: 11.2 }
+        ]
+      },
+      {
+        id: '3',
+        name: 'Elena Rodriguez',
+        bio: 'Video producer and social media expert. Creates engaging content for lifestyle and fashion brands.',
+        avatar: '/api/placeholder/100/100',
+        specialties: ['Video Production', 'Social Media', 'Fashion', 'Lifestyle'],
+        platforms: ['Instagram', 'TikTok', 'YouTube', 'Pinterest'],
+        followerCount: 200000,
+        engagementRate: 12.3,
+        hourlyRate: 100,
+        rating: 4.8,
+        isVerified: true,
+        location: 'Los Angeles, CA',
+        languages: ['English', 'Spanish'],
+        portfolio: [
+          { title: 'Fashion Week Coverage', type: 'Video', views: 500000, engagement: 15.6 },
+          { title: 'Style Guide Series', type: 'Carousel', views: 300000, engagement: 18.2 }
+        ]
+      }
+    ];
+
     setTimeout(() => {
       setBriefs(mockBriefs);
+      setCreators(mockCreators);
       setFilteredBriefs(mockBriefs);
+      setFilteredCreators(mockCreators);
       setLoading(false);
     }, 1000);
   }, []);
 
-  // Filter briefs based on search and category
+  // Filter briefs and creators based on search and category
   useEffect(() => {
-    let filtered = briefs;
+    if (marketplaceType === 'creator') {
+      let filtered = briefs;
 
-    if (searchTerm) {
-      filtered = filtered.filter(brief =>
-        brief.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        brief.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        brief.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-      );
+      if (searchTerm) {
+        filtered = filtered.filter(brief =>
+          brief.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          brief.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          brief.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
+      }
+
+      if (selectedCategory !== 'all') {
+        filtered = filtered.filter(brief => brief.contentType === selectedCategory);
+      }
+
+      setFilteredBriefs(filtered);
+    } else {
+      let filtered = creators;
+
+      if (searchTerm) {
+        filtered = filtered.filter(creator =>
+          creator.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          creator.bio.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          creator.specialties.some(specialty => specialty.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
+      }
+
+      if (selectedCategory !== 'all') {
+        filtered = filtered.filter(creator => 
+          creator.specialties.some(specialty => specialty.toLowerCase().includes(selectedCategory.toLowerCase()))
+        );
+      }
+
+      setFilteredCreators(filtered);
     }
-
-    if (selectedCategory !== 'all') {
-      filtered = filtered.filter(brief => brief.contentType === selectedCategory);
-    }
-
-    setFilteredBriefs(filtered);
-  }, [searchTerm, selectedCategory, briefs]);
+  }, [searchTerm, selectedCategory, briefs, creators, marketplaceType]);
 
   const handleApply = (brief: Brief) => {
     setSelectedBrief(brief);
     setShowApplicationModal(true);
+  };
+
+  const handleContactCreator = (creator: Creator) => {
+    setSelectedCreator(creator);
+    setShowContactModal(true);
   };
 
   const handleSubmitApplication = () => {
@@ -149,13 +263,39 @@ export default function MarketplaceNeo() {
     });
   };
 
-  const categories = [
+  const handleSubmitContact = () => {
+    // TODO: Submit contact request via API
+    console.log('Contacting creator:', {
+      creatorId: selectedCreator?.id,
+      ...applicationData
+    });
+    setShowContactModal(false);
+    setApplicationData({
+      proposal: '',
+      budget: '',
+      timeline: '',
+      message: ''
+    });
+  };
+
+  const creatorCategories = [
     { id: 'all', label: 'All', icon: '' },
     { id: 'ARTICLE', label: 'Articles', icon: '' },
     { id: 'VIDEO', label: 'Videos', icon: '' },
     { id: 'SOCIAL_POST', label: 'Social Posts', icon: '' },
     { id: 'PODCAST', label: 'Podcasts', icon: '' }
   ];
+
+  const businessCategories = [
+    { id: 'all', label: 'All', icon: '' },
+    { id: 'AI', label: 'AI', icon: '' },
+    { id: 'Marketing', label: 'Marketing', icon: '' },
+    { id: 'Video Production', label: 'Video Production', icon: '' },
+    { id: 'Social Media', label: 'Social Media', icon: '' },
+    { id: 'Tech', label: 'Tech', icon: '' }
+  ];
+
+  const categories = marketplaceType === 'creator' ? creatorCategories : businessCategories;
 
   if (loading) {
     return (
