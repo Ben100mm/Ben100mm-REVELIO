@@ -81,43 +81,42 @@ export default function NeoNavigation() {
         </button>
       </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 px-4 sm:px-6 lg:px-8">
-            <NeoGlass variant="dark" className="p-4 rounded-2xl">
-              <div className="space-y-2">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`block px-4 py-3 rounded-lg transition-all duration-200 ${
-                      isActive(item.href)
-                        ? 'bg-blue-500/20 text-blue-400'
-                        : 'text-slate-300 hover:text-white hover:bg-white/10'
-                    }`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-                
-                <div className="pt-4 border-t border-slate-600/50 space-y-2">
-                  <Link href="/auth/login" onClick={() => setIsMobileMenuOpen(false)}>
-                    <NeoButton variant="ghost" size="sm" fullWidth>
-                      Sign In
-                    </NeoButton>
-                  </Link>
-                  <Link href="/auth/register" onClick={() => setIsMobileMenuOpen(false)}>
-                    <NeoButton variant="primary" size="sm" fullWidth>
-                      Get Started
-                    </NeoButton>
-                  </Link>
-                </div>
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden mt-4 pb-4 px-4 sm:px-6 lg:px-8">
+          <NeoGlass variant="dark" className="p-4 rounded-2xl">
+            <div className="space-y-2">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`block px-4 py-3 rounded-lg transition-all duration-200 ${
+                    isActive(item.href)
+                      ? 'bg-blue-500/20 text-blue-400'
+                      : 'text-slate-300 hover:text-white hover:bg-white/10'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              
+              <div className="pt-4 border-t border-slate-600/50 space-y-2">
+                <Link href="/auth/login" onClick={() => setIsMobileMenuOpen(false)}>
+                  <NeoButton variant="ghost" size="sm" fullWidth>
+                    Sign In
+                  </NeoButton>
+                </Link>
+                <Link href="/auth/register" onClick={() => setIsMobileMenuOpen(false)}>
+                  <NeoButton variant="primary" size="sm" fullWidth>
+                    Get Started
+                  </NeoButton>
+                </Link>
               </div>
-            </NeoGlass>
-          </div>
-        )}
-      </div>
+            </div>
+          </NeoGlass>
+        </div>
+      )}
     </nav>
   );
 }
