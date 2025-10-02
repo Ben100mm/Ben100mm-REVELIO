@@ -102,62 +102,82 @@ export default function CreatorDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="h-12 w-12 bg-primary-100 rounded-full flex items-center justify-center">
-                  <span className="text-primary-600 font-semibold text-lg">
-                    {creator.displayName.charAt(0)}
-                  </span>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50"></div>
+      <div className="absolute inset-0 bg-mesh opacity-5"></div>
+      
+      {/* Floating Elements */}
+      <div className="absolute top-10 right-10 w-20 h-20 bg-gradient-to-br from-primary-400/10 to-accent-400/10 rounded-full blur-xl float-element"></div>
+      <div className="absolute bottom-10 left-10 w-16 h-16 bg-gradient-to-br from-accent-400/10 to-primary-400/10 rounded-full blur-lg float-element" style={{animationDelay: '2s'}}></div>
+      
+      <div className="relative z-10">
+        {/* Header */}
+        <div className="card-glass backdrop-blur-2xl border-b border-white/20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center py-8">
+              <div className="flex items-center">
+                <div className="flex-shrink-0 relative">
+                  <div className="h-16 w-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center shadow-3d-lg">
+                    <span className="text-white font-bold text-xl">
+                      {creator.displayName.charAt(0)}
+                    </span>
+                  </div>
+                  {creator.isVerified && (
+                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center shadow-lg shadow-green-500/50">
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                <div className="ml-6">
+                  <h1 className="heading-4 text-slate-900">{creator.displayName}</h1>
+                  <p className="text-slate-600 font-medium">@{creator.username}</p>
+                  {creator.isVerified && (
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-green-100/80 text-green-700 border border-green-200/50 shadow-3d-sm mt-2">
+                      Verified Creator
+                    </span>
+                  )}
                 </div>
               </div>
-              <div className="ml-4">
-                <h1 className="text-2xl font-bold text-gray-900">{creator.displayName}</h1>
-                <p className="text-gray-600">@{creator.username}</p>
-                {creator.isVerified && (
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                    Verified Creator
-                  </span>
-                )}
+              <div className="flex space-x-4">
+                <button className="btn-secondary">Settings</button>
+                <button className="btn-primary group">
+                  <span className="relative z-10">Create Content</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-accent-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
               </div>
-            </div>
-            <div className="flex space-x-4">
-              <button className="btn-secondary">Settings</button>
-              <button className="btn-primary">Create Content</button>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Navigation Tabs */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="border-b border-gray-200">
-          <nav className="-mb-px flex space-x-8">
-            {[
-              { id: 'overview', name: 'Overview' },
-              { id: 'content', name: 'Content' },
-              { id: 'analytics', name: 'Analytics' },
-              { id: 'earnings', name: 'Earnings' },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                  activeTab === tab.id
-                    ? 'border-primary-500 text-primary-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-              >
-                {tab.name}
-              </button>
-            ))}
-          </nav>
+        {/* Navigation Tabs */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+          <div className="card-glass backdrop-blur-xl rounded-2xl p-2">
+            <nav className="flex space-x-2">
+              {[
+                { id: 'overview', name: 'Overview', icon: '📊' },
+                { id: 'content', name: 'Content', icon: '📝' },
+                { id: 'analytics', name: 'Analytics', icon: '📈' },
+                { id: 'earnings', name: 'Earnings', icon: '💰' },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`nav-item flex items-center space-x-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
+                    activeTab === tab.id
+                      ? 'bg-white/80 text-primary-600 shadow-3d-md'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  <span>{tab.icon}</span>
+                  <span>{tab.name}</span>
+                </button>
+              ))}
+            </nav>
+          </div>
         </div>
-      </div>
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -165,94 +185,96 @@ export default function CreatorDashboard() {
           <div className="space-y-6">
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              <div className="card">
+              <div className="card-elevated group">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <div className="h-8 w-8 bg-blue-100 rounded-md flex items-center justify-center">
-                      <svg className="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="h-12 w-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-3d-lg group-hover:shadow-glow-primary transition-all duration-500 transform group-hover:scale-110">
+                      <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
                     </div>
                   </div>
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-500">Total Content</p>
-                    <p className="text-2xl font-semibold text-gray-900">{creator._count.content}</p>
+                    <p className="text-sm font-semibold text-slate-600">Total Content</p>
+                    <p className="text-2xl font-bold text-slate-900">{creator._count.content}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="card">
+              <div className="card-elevated group">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <div className="h-8 w-8 bg-green-100 rounded-md flex items-center justify-center">
-                      <svg className="h-5 w-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="h-12 w-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-3d-lg group-hover:shadow-lg group-hover:shadow-green-500/50 transition-all duration-500 transform group-hover:scale-110">
+                      <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                       </svg>
                     </div>
                   </div>
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-500">Total Earnings</p>
-                    <p className="text-2xl font-semibold text-gray-900">
+                    <p className="text-sm font-semibold text-slate-600">Total Earnings</p>
+                    <p className="text-2xl font-bold text-slate-900">
                       ${analytics?.totals.earnings.toFixed(2) || '0.00'}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="card">
+              <div className="card-elevated group">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <div className="h-8 w-8 bg-purple-100 rounded-md flex items-center justify-center">
-                      <svg className="h-5 w-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="h-12 w-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-3d-lg group-hover:shadow-lg group-hover:shadow-purple-500/50 transition-all duration-500 transform group-hover:scale-110">
+                      <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                       </svg>
                     </div>
                   </div>
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-500">Total Views</p>
-                    <p className="text-2xl font-semibold text-gray-900">{analytics?.totals.views.toLocaleString() || '0'}</p>
+                    <p className="text-sm font-semibold text-slate-600">Total Views</p>
+                    <p className="text-2xl font-bold text-slate-900">{analytics?.totals.views.toLocaleString() || '0'}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="card">
+              <div className="card-elevated group">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <div className="h-8 w-8 bg-orange-100 rounded-md flex items-center justify-center">
-                      <svg className="h-5 w-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="h-12 w-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-3d-lg group-hover:shadow-lg group-hover:shadow-orange-500/50 transition-all duration-500 transform group-hover:scale-110">
+                      <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                       </svg>
                     </div>
                   </div>
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-500">Total Clicks</p>
-                    <p className="text-2xl font-semibold text-gray-900">{analytics?.totals.clicks.toLocaleString() || '0'}</p>
+                    <p className="text-sm font-semibold text-slate-600">Total Clicks</p>
+                    <p className="text-2xl font-bold text-slate-900">{analytics?.totals.clicks.toLocaleString() || '0'}</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Recent Content */}
-            <div className="card">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Recent Content</h3>
+            <div className="card-elevated">
+              <h3 className="heading-6 text-slate-900 mb-6">Recent Content</h3>
               <div className="space-y-4">
                 {content.slice(0, 5).map((item) => (
-                  <div key={item.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-                    <div>
-                      <h4 className="font-medium text-gray-900">{item.title}</h4>
-                      <p className="text-sm text-gray-500">
+                  <div key={item.id} className="group flex items-center justify-between p-6 bg-gradient-to-r from-white/50 to-slate-50/50 backdrop-blur-sm border border-white/50 rounded-xl shadow-3d-sm hover:shadow-3d-md transition-all duration-300 hover:-translate-y-1">
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-slate-900 group-hover:text-primary-600 transition-colors duration-300">{item.title}</h4>
+                      <p className="text-sm text-slate-600 mt-1">
                         {item.type} • {item.status} • {new Date(item.publishedAt).toLocaleDateString()}
                         {item.isSponsored && (
-                          <span className="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                          <span className="ml-3 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 border border-blue-300/50 shadow-3d-sm">
                             Sponsored
                           </span>
                         )}
                       </p>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-sm text-gray-500">{item._count.performance} views</span>
-                      <button className="text-primary-600 hover:text-primary-500">View</button>
+                    <div className="flex items-center space-x-4">
+                      <span className="text-sm font-semibold text-slate-600">{item._count.performance} views</span>
+                      <button className="btn-ghost text-sm px-4 py-2 group-hover:bg-primary-100 group-hover:text-primary-600 transition-all duration-300">
+                        View
+                      </button>
                     </div>
                   </div>
                 ))}
