@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import NeoNavigation from '@/components/layout/NeoNavigation'
-import NeoFooter from '@/components/layout/NeoFooter'
+import ConditionalLayout from '@/components/layout/ConditionalLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,13 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="min-h-screen flex flex-col">
-          <NeoNavigation />
-          <main className="flex-1">
-            {children}
-          </main>
-          <NeoFooter />
-        </div>
+        <ConditionalLayout>
+          {children}
+        </ConditionalLayout>
       </body>
     </html>
   )
