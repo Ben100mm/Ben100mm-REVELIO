@@ -253,11 +253,11 @@ export default function ContentApprovalWorkflow() {
 
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'video': return '🎥';
-      case 'image': return '🖼';
-      case 'article': return '📄';
-      case 'story': return '📱';
-      default: return '📄';
+      case 'video': return 'Video';
+      case 'image': return 'Image';
+      case 'article': return 'Article';
+      case 'story': return 'Story';
+      default: return 'Article';
     }
   };
 
@@ -501,21 +501,21 @@ export default function ContentApprovalWorkflow() {
                 onClick={() => handleApprove(selectedItem.id)}
                 className="flex-1"
               >
-                ✅ Approve
+                ✓ Approve
               </NeoButton>
               <NeoButton 
                 variant="warning" 
                 onClick={() => handleRequestRevision(selectedItem.id)}
                 className="flex-1"
               >
-                🔄 Request Revision
+                ⟲ Request Revision
               </NeoButton>
               <NeoButton 
                 variant="error" 
                 onClick={() => handleReject(selectedItem.id)}
                 className="flex-1"
               >
-                ❌ Reject
+                ✗ Reject
               </NeoButton>
             </div>
           </div>
