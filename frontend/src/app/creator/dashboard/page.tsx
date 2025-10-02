@@ -1,5 +1,5 @@
-import CreatorDashboard from '@/components/creator/CreatorDashboard';
+import CreatorDashboardNeo from '@/components/creator/CreatorDashboardNeo';
 
 export default function CreatorDashboardPage() {
-  return <CreatorDashboard />;
+  return <CreatorDashboardNeo />;
 }

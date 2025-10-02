@@ -1,5 +1,5 @@
-import LoginForm from '@/components/auth/LoginForm';
+import LoginFormNeo from '@/components/auth/LoginFormNeo';
 
 export default function LoginPage() {
-  return <LoginForm />;
+  return <LoginFormNeo />;
 }
