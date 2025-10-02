@@ -36,24 +36,24 @@ interface ContentForm {
 }
 
 const CONTENT_TYPES = [
-  { id: 'ARTICLE', label: 'Article', icon: '📝', description: 'Long-form written content' },
-  { id: 'VIDEO', label: 'Video', icon: '🎥', description: 'Video content for platforms' },
-  { id: 'PODCAST', label: 'Podcast', icon: '🎙️', description: 'Audio content and episodes' },
-  { id: 'SOCIAL_POST', label: 'Social Post', icon: '📱', description: 'Short-form social content' },
-  { id: 'INFOGRAPHIC', label: 'Infographic', icon: '📊', description: 'Visual data representation' },
-  { id: 'THREAD', label: 'Thread', icon: '🧵', description: 'Twitter/X thread series' },
-  { id: 'CAROUSEL', label: 'Carousel', icon: '🎠', description: 'Multi-slide content' }
+  { id: 'ARTICLE', label: 'Article', icon: '', description: 'Long-form written content' },
+  { id: 'VIDEO', label: 'Video', icon: '', description: 'Video content for platforms' },
+  { id: 'PODCAST', label: 'Podcast', icon: '', description: 'Audio content and episodes' },
+  { id: 'SOCIAL_POST', label: 'Social Post', icon: '', description: 'Short-form social content' },
+  { id: 'INFOGRAPHIC', label: 'Infographic', icon: '', description: 'Visual data representation' },
+  { id: 'THREAD', label: 'Thread', icon: '', description: 'Twitter/X thread series' },
+  { id: 'CAROUSEL', label: 'Carousel', icon: '', description: 'Multi-slide content' }
 ];
 
 const PLATFORMS = [
-  { id: 'youtube', label: 'YouTube', icon: '📺' },
-  { id: 'instagram', label: 'Instagram', icon: '📸' },
-  { id: 'tiktok', label: 'TikTok', icon: '🎵' },
-  { id: 'twitter', label: 'X (Twitter)', icon: '🐦' },
-  { id: 'linkedin', label: 'LinkedIn', icon: '💼' },
-  { id: 'facebook', label: 'Facebook', icon: '👥' },
-  { id: 'medium', label: 'Medium', icon: '📖' },
-  { id: 'substack', label: 'Substack', icon: '📧' }
+  { id: 'youtube', label: 'YouTube', icon: '' },
+  { id: 'instagram', label: 'Instagram', icon: '' },
+  { id: 'tiktok', label: 'TikTok', icon: '' },
+  { id: 'twitter', label: 'X (Twitter)', icon: '' },
+  { id: 'linkedin', label: 'LinkedIn', icon: '' },
+  { id: 'facebook', label: 'Facebook', icon: '' },
+  { id: 'medium', label: 'Medium', icon: '' },
+  { id: 'substack', label: 'Substack', icon: '' }
 ];
 
 const MOCK_BRIEFS = [

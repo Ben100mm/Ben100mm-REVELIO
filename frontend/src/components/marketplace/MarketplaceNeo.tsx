@@ -150,11 +150,11 @@ export default function MarketplaceNeo() {
   };
 
   const categories = [
-    { id: 'all', label: 'All', icon: '🌟' },
-    { id: 'ARTICLE', label: 'Articles', icon: '📝' },
-    { id: 'VIDEO', label: 'Videos', icon: '🎥' },
-    { id: 'SOCIAL_POST', label: 'Social Posts', icon: '📱' },
-    { id: 'PODCAST', label: 'Podcasts', icon: '🎧' }
+    { id: 'all', label: 'All', icon: '' },
+    { id: 'ARTICLE', label: 'Articles', icon: '' },
+    { id: 'VIDEO', label: 'Videos', icon: '' },
+    { id: 'SOCIAL_POST', label: 'Social Posts', icon: '' },
+    { id: 'PODCAST', label: 'Podcasts', icon: '' }
   ];
 
   if (loading) {
@@ -195,7 +195,6 @@ export default function MarketplaceNeo() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 variant="glass"
-                icon="🔍"
               />
             </NeoCard>
 
